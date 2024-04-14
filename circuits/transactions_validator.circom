@@ -11,8 +11,9 @@ template TransactionsValidator() {
     component gte;
     gte= GreaterEqThan(5);
     gte.in[0] <== in;
-    gte.in[1] <== 1;
+    gte.in[1] <== 2;
 
+    gte.out === 1;
     out <== gte.out;
 }
 

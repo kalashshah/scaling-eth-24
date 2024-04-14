@@ -1,0 +1,151 @@
+{
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "plonkVerifierAddress",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "s_plonkVerifierAddress",
+      "inputs": [],
+      "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "submitProof",
+      "inputs": [
+        {
+          "name": "proof",
+          "type": "uint256[24]",
+          "internalType": "uint256[24]"
+        },
+        {
+          "name": "pubSignals",
+          "type": "uint256[1]",
+          "internalType": "uint256[1]"
+        }
+      ],
+      "outputs": [{ "name": "", "type": "bool", "internalType": "bool" }],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "event",
+      "name": "ProofResult",
+      "inputs": [
+        {
+          "name": "result",
+          "type": "bool",
+          "indexed": false,
+          "internalType": "bool"
+        }
+      ],
+      "anonymous": false
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052348015600f57600080fd5b50604051610295380380610295833981016040819052602c916050565b600080546001600160a01b0319166001600160a01b0392909216919091179055607e565b600060208284031215606157600080fd5b81516001600160a01b0381168114607757600080fd5b9392505050565b6102088061008d6000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806344896a9a1461003b5780636641be151461006b575b600080fd5b60005461004e906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b61007e610079366004610149565b61008e565b6040519015158152602001610062565b600080546040516001628dbf5960e01b0319815282916001600160a01b03169063ff7240a7906100c4908790879060040161018e565b602060405180830381865afa1580156100e1573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061010591906101a9565b90507fb6030296ed6d28f593d0c257c080ef243cd60eb419e82d45d9e530c5939151028160405161013a911515815260200190565b60405180910390a19392505050565b60008061032080848603121561015e57600080fd5b61030084018581111561017057600080fd5b84935085828601111561018257600080fd5b80925050509250929050565b61032081016103008085843760208482850137509392505050565b6000602082840312156101bb57600080fd5b815180151581146101cb57600080fd5b939250505056fea2646970667358221220c4430c646be89c0e6bb74ab8bf7bb311f12439654c8aa9264eb57238545df66764736f6c63430008190033",
+    "sourceMap": "265:643:21:-:0;;;382:104;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;434:22;:45;;-1:-1:-1;;;;;;434:45:21;-1:-1:-1;;;;;434:45:21;;;;;;;;;;265:643;;14:290:22;84:6;137:2;125:9;116:7;112:23;108:32;105:52;;;153:1;150;143:12;105:52;179:16;;-1:-1:-1;;;;;224:31:22;;214:42;;204:70;;270:1;267;260:12;204:70;293:5;14:290;-1:-1:-1;;;14:290:22:o;:::-;265:643:21;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c806344896a9a1461003b5780636641be151461006b575b600080fd5b60005461004e906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b61007e610079366004610149565b61008e565b6040519015158152602001610062565b600080546040516001628dbf5960e01b0319815282916001600160a01b03169063ff7240a7906100c4908790879060040161018e565b602060405180830381865afa1580156100e1573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061010591906101a9565b90507fb6030296ed6d28f593d0c257c080ef243cd60eb419e82d45d9e530c5939151028160405161013a911515815260200190565b60405180910390a19392505050565b60008061032080848603121561015e57600080fd5b61030084018581111561017057600080fd5b84935085828601111561018257600080fd5b80925050509250929050565b61032081016103008085843760208482850137509392505050565b6000602082840312156101bb57600080fd5b815180151581146101cb57600080fd5b939250505056fea2646970667358221220c4430c646be89c0e6bb74ab8bf7bb311f12439654c8aa9264eb57238545df66764736f6c63430008190033",
+    "sourceMap": "265:643:21:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;301:37;;;;;-1:-1:-1;;;;;301:37:21;;;;;;-1:-1:-1;;;;;178:32:22;;;160:51;;148:2;133:18;301:37:21;;;;;;;;590:316;;;;;;:::i;:::-;;:::i;:::-;;;811:14:22;;804:22;786:41;;774:2;759:18;590:316:21;646:187:22;590:316:21;709:4;754:22;;739:103;;-1:-1:-1;;;;;;739:103:21;;709:4;;-1:-1:-1;;;;;754:22:21;;739:50;;:103;;803:5;;822:10;;739:103;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;725:117;;857:19;869:6;857:19;;;;811:14:22;804:22;786:41;;774:2;759:18;;646:187;857:19:21;;;;;;;;893:6;590:316;-1:-1:-1;;;590:316:21:o;222:419:22:-;341:6;349;380:3;424:2;412:9;403:7;399:23;395:32;392:52;;;440:1;437;430:12;392:52;478:3;467:9;463:19;501:7;497:2;494:15;491:35;;;522:1;519;512:12;491:35;545:9;535:19;;589:7;584:2;573:9;569:18;566:31;563:51;;;610:1;607;600:12;563:51;633:2;623:12;;;;222:419;;;;;:::o;838:394::-;1098:3;1083:19;;1121:6;;1160;1087:9;1136:35;1221:4;1213:6;1208:2;1197:9;1193:18;1180:46;;838:394;;;;;:::o;1237:277::-;1304:6;1357:2;1345:9;1336:7;1332:23;1328:32;1325:52;;;1373:1;1370;1363:12;1325:52;1405:9;1399:16;1458:5;1451:13;1444:21;1437:5;1434:32;1424:60;;1480:1;1477;1470:12;1424:60;1503:5;1237:277;-1:-1:-1;;;1237:277:22:o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "s_plonkVerifierAddress()": "44896a9a",
+    "submitProof(uint256[24],uint256[1])": "6641be15"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"plonkVerifierAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"result\",\"type\":\"bool\"}],\"name\":\"ProofResult\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"s_plonkVerifierAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256[24]\",\"name\":\"proof\",\"type\":\"uint256[24]\"},{\"internalType\":\"uint256[1]\",\"name\":\"pubSignals\",\"type\":\"uint256[1]\"}],\"name\":\"submitProof\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/TransactionValidator.sol\":\"TransactionValidator\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":forge-std/=lib/forge-std/src/\"]},\"sources\":{\"src/TransactionValidator.sol\":{\"keccak256\":\"0x4b9432358fdb68a5dab372502c19fb4d852d1ee2f592d081bc3af357b87e084d\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://db66dec7ea2913d87026cc6ce618346fa5a15ff8b94a29f3302ab28be5e49250\",\"dweb:/ipfs/QmQi8BHzXSMFiDdndzE5pTnq6yRWk7U8pgDKAA3tbSeZav\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": { "version": "0.8.25+commit.b61c2a91" },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "plonkVerifierAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bool",
+              "name": "result",
+              "type": "bool",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "ProofResult",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "s_plonkVerifierAddress",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint256[24]",
+              "name": "proof",
+              "type": "uint256[24]"
+            },
+            {
+              "internalType": "uint256[1]",
+              "name": "pubSignals",
+              "type": "uint256[1]"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "submitProof",
+          "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }]
+        }
+      ],
+      "devdoc": { "kind": "dev", "methods": {}, "version": 1 },
+      "userdoc": { "kind": "user", "methods": {}, "version": 1 }
+    },
+    "settings": {
+      "remappings": ["forge-std/=lib/forge-std/src/"],
+      "optimizer": { "enabled": true, "runs": 200 },
+      "metadata": { "bytecodeHash": "ipfs" },
+      "compilationTarget": {
+        "src/TransactionValidator.sol": "TransactionValidator"
+      },
+      "evmVersion": "paris",
+      "libraries": {}
+    },
+    "sources": {
+      "src/TransactionValidator.sol": {
+        "keccak256": "0x4b9432358fdb68a5dab372502c19fb4d852d1ee2f592d081bc3af357b87e084d",
+        "urls": [
+          "bzz-raw://db66dec7ea2913d87026cc6ce618346fa5a15ff8b94a29f3302ab28be5e49250",
+          "dweb:/ipfs/QmQi8BHzXSMFiDdndzE5pTnq6yRWk7U8pgDKAA3tbSeZav"
+        ],
+        "license": "GPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "id": 21
+}
