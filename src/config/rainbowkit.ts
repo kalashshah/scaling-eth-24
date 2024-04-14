@@ -1,10 +1,10 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { mainnet, polygon, optimism, arbitrum, base } from "wagmi/chains";
+import { gnosis, gnosisChiado } from "wagmi/chains";
 
 const rainbowConfig = getDefaultConfig({
   appName: "Gnosis Lounge",
   projectId: import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID,
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: [gnosis, gnosisChiado],
   ssr: false,
 });
 
