@@ -2,16 +2,14 @@
 // Compatible with OpenZeppelin Contracts ^5.0.0
 pragma solidity ^0.8.13;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import "../lib/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
+import "../lib/openzeppelin-contracts/contracts/access/Ownable.sol";
+import "../lib/openzeppelin-contracts/contracts/token/ERC20/extensions/ERC20Permit.sol";
 
 contract GnosisLoungeToken is ERC20, Ownable, ERC20Permit {
-    constructor(
-        address initialOwner
-    )
+    constructor()
         ERC20("GnosisLoungeToken", "GLT")
-        Ownable(initialOwner)
+        Ownable(msg.sender)
         ERC20Permit("GnosisLoungeToken")
     {
         _mint(msg.sender, 10000000 * 10 ** decimals());
