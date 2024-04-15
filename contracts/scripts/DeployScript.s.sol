@@ -12,8 +12,9 @@ contract TransactionValidatorScript is Script {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
 
-        PlonkVerifier pv = new PlonkVerifier();
-        TransactionValidator sm = new TransactionValidator(address(pv));
+        // PlonkVerifier pv = new PlonkVerifier();
+        address plonkAddress = 0x5B2B5b8D8Fc731D4403a585B8D0CfdF114727460;
+        TransactionValidator sm = new TransactionValidator(plonkAddress);
 
         vm.stopBroadcast();
     }

@@ -20,24 +20,30 @@ contract TransactionValidator {
         ownerAddress = msg.sender;
     }
 
-    mapping(address => bool) public whitelistedAddress;
+    mapping(address => uint256) public whitelistedAddressToTime;
 
-    function whitelistAddress(address userAddress) public  {
-        whitelistedAddress[userAddress] = true;
+    function whitelistAddress(address userAddress) public {
+        whitelistedAddressToTime[userAddress] = block.timestamp;
+    }
+
+    function isVerified(address userAddess) public view returns (bool) {
+        return
+            whitelistedAddressToTime[userAddess] > (block.timestamp - 2592000);
     }
 
     // ZK proof is generated in the browser and submitted as a transaction w/ the proof as bytes.
     function submitProof(
         uint256[24] calldata proof,
-        uint256[1] calldata pubSignals
+        uint256[1] calldata pubSignals,
+        address toWhitelistAddress
     ) public returns (bool) {
         bool result = IPlonkVerifier(s_plonkVerifierAddress).verifyProof(
             proof,
             pubSignals
         );
         emit ProofResult(result);
-        if(result == true){
-            whitelistAddress(msg.sender);
+        if (result == true) {
+            whitelistAddress(toWhitelistAddress);
         }
         return result;
     }

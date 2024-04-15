@@ -2,6 +2,8 @@ import { Addresses } from "@/shared/addresses";
 import { notifications } from "@mantine/notifications";
 import { useEffect } from "react";
 import {
+  useAccount,
+  useReadContract,
   useWaitForTransactionReceipt,
   useWatchContractEvent,
   useWriteContract,
@@ -12,6 +14,17 @@ const abiPath = require("../lib/abi/TransactionValidator.json");
 const useProof = () => {
   const { writeContractAsync, data: hash } = useWriteContract();
   const { data: txReceipt } = useWaitForTransactionReceipt({ hash });
+
+  const { address } = useAccount();
+
+  const { data: isVerified, refetch: refetchIsVerified } = useReadContract({
+    abi: abiPath.abi,
+    address: Addresses.TRANSACTION_VALIDATOR_ADDR,
+    functionName: "isVerified",
+    args: [address!],
+  });
+
+  console.log({ isVerified });
 
   useWatchContractEvent({
     abi: abiPath.abi,
@@ -39,7 +52,7 @@ const useProof = () => {
           abi: abiPath.abi,
           address: Addresses.TRANSACTION_VALIDATOR_ADDR,
           functionName: "submitProof",
-          args: [proof, publicSignals],
+          args: [proof, publicSignals, address],
         },
         {
           onSuccess: (p) => {
@@ -69,10 +82,11 @@ const useProof = () => {
         color: "green",
         autoClose: false,
       });
+      refetchIsVerified();
     }
   }, [txReceipt]);
 
-  return { executeTransaction, txReceipt };
+  return { executeTransaction, txReceipt, isVerified };
 };
 
 export default useProof;

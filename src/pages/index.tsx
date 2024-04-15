@@ -27,7 +27,7 @@ const abiPath = require("../lib/abi/TransactionValidator.json");
 export default function GenerateProof() {
   // const [input0, setInput0] = useState("");
   const { isConnected, address } = useAccount();
-  const { executeTransaction } = useProof();
+  const { executeTransaction, isVerified } = useProof();
   const [loading, setLoading] = useState<Boolean>(false);
   const [proof, setProof] = useState<string | null>(null);
   const [publicSignals, sentPublicSignals] = useState<string[] | null>(null);
@@ -46,16 +46,20 @@ export default function GenerateProof() {
     e.preventDefault();
     if (!address) {
       //TODO: show toast
-
       return;
     }
 
+    if (isVerified) {
+      //TODO : navigate
+      console.log("Verified!!");
+      return;
+    }
     setLoading(true);
-    // const input0 = await getTransactionCount(rainbowConfig, {
-    //   address: address,
-    // });
+    const input0 = await getTransactionCount(rainbowConfig, {
+      address: address,
+    });
 
-    const input0 = 3;
+    // const input0 = 3;
 
     console.log({ input0 });
 
