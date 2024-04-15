@@ -11,11 +11,19 @@ interface IPlonkVerifier {
 
 contract TransactionValidator {
     address public s_plonkVerifierAddress;
+    address public ownerAddress;
 
     event ProofResult(bool result);
 
     constructor(address plonkVerifierAddress) {
         s_plonkVerifierAddress = plonkVerifierAddress;
+        ownerAddress = msg.sender;
+    }
+
+    mapping(address => bool) public whitelistedAddress;
+
+    function whitelistAddress(address userAddress) public  {
+        whitelistedAddress[userAddress] = true;
     }
 
     // ZK proof is generated in the browser and submitted as a transaction w/ the proof as bytes.
@@ -28,6 +36,9 @@ contract TransactionValidator {
             pubSignals
         );
         emit ProofResult(result);
+        if(result == true){
+            whitelistAddress(msg.sender);
+        }
         return result;
     }
 }

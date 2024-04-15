@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import {
   Stack,
@@ -17,13 +18,20 @@ import { notifications } from "@mantine/notifications";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
 import useProof from "@/hooks/useProof";
 import { Addresses } from "@/shared/addresses";
-
+import { getTransactionCount } from "wagmi/actions";
+import { rainbowConfig } from "@/config/rainbowkit";
+import { Column } from "@cred/neopop-web/lib/components";
+import QRCode from "react-qr-code";
 const abiPath = require("../lib/abi/TransactionValidator.json");
 
-export default function Home() {
-  const [input0, setInput0] = useState("");
-  const { isConnected } = useAccount();
+export default function GenerateProof() {
+  // const [input0, setInput0] = useState("");
+  const { isConnected, address } = useAccount();
   const { executeTransaction } = useProof();
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [proof, setProof] = useState<string | null>(null);
+  const [publicSignals, sentPublicSignals] = useState<string[] | null>(null);
+  const [qrCodeString, setQRCodeString] = useState<string | null>(null);
 
   // useWatchContractEvent({
   //   abi: abiPath.abi,
@@ -36,6 +44,20 @@ export default function Home() {
 
   const handleGenerateProofSendTransaction = async (e: any) => {
     e.preventDefault();
+    if (!address) {
+      //TODO: show toast
+
+      return;
+    }
+
+    setLoading(true);
+    // const input0 = await getTransactionCount(rainbowConfig, {
+    //   address: address,
+    // });
+
+    const input0 = 3;
+
+    console.log({ input0 });
 
     // We will send an HTTP request with our inputs to our next.js backend to
     // request a proof to be generated.
@@ -56,9 +78,36 @@ export default function Home() {
 
       // Split out the proof and public signals from the response data
       const { proof, publicSignals } = res.data;
+      setProof(proof);
+      sentPublicSignals(publicSignals);
+
+      setQRCodeString(res.data.toString());
 
       // Write the transaction
+      // await executeTransaction(proof, publicSignals);
+    } catch (err: any) {
+      const statusCode = err?.response?.status;
+      const errorMsg = err?.response?.data?.error;
+      notifications.show({
+        message: `Error ${statusCode}: ${errorMsg}`,
+        color: "red",
+      });
+    }
+
+    setLoading(false);
+  };
+
+  const verifyProofOnChain = async () => {
+    if (!publicSignals) {
+      return;
+    }
+    try {
+      // Write the transaction
       await executeTransaction(proof, publicSignals);
+      notifications.show({
+        message: "Proof generated successfully! Submitting transaction...",
+        color: "green",
+      });
     } catch (err: any) {
       const statusCode = err?.response?.status;
       const errorMsg = err?.response?.data?.error;
@@ -74,54 +123,54 @@ export default function Home() {
     if (!isConnected) {
       return <ConnectWalletButton />;
     }
-    return <Button type="submit">Generate Proof & Send Transaction</Button>;
+    return (
+      <Button type="submit" onClick={handleGenerateProofSendTransaction}>
+        {loading ? "loading..." : "Generate Proof & Send Transaction"}
+      </Button>
+    );
   };
-
+  console.log({ qrCodeString });
   return (
     <>
-      <Head>
-        <title>ZK Simple Multiplier</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Stack justify="center" align="center" w="100vw" h="100vh" spacing={0}>
-        <Stack align="center" spacing={0}>
-          <Group w="96vw" h="10vh" position="apart" align="center">
-            <Title order={3}>ZK Simple Multiplier</Title>
-            <ConnectWalletButton />
-          </Group>
-          <Grid align="center" justify="center" mih="80vh">
-            <Grid.Col sm={8} md={6} lg={4}>
-              <Text>
-                {
-                  "Input two numbers between 0 and 5, inclusive. The two numbers must \
-                not be equal. We'll generate a ZK proof locally in the browser, and \
-                only the proof will be sent to the blockchain so that no one \
-                watching the blockchain will know the two numbers."
-                }
-              </Text>
-              <Space h={20} />
-              <form onSubmit={handleGenerateProofSendTransaction}>
-                <Stack spacing="sm">
-                  <Input.Wrapper label="Input 0">
-                    <Input
-                      placeholder="Number between 0 and 5"
-                      value={input0}
-                      onChange={(e) => setInput0(e.currentTarget.value)}
-                    />
-                  </Input.Wrapper>
-                  <Space h={10} />
-                  {renderSubmitButton()}
-                </Stack>
-              </form>
-            </Grid.Col>
-          </Grid>
-          <Group w="96vw" h="10vh" position="center" align="center">
-            <Link href="https://medium.com/@yujiangtham/writing-a-zero-knowledge-dapp-fd7f936e2d43">
-              <Text>Created using this tutorial!</Text>
-            </Link>
-          </Group>
-        </Stack>
-      </Stack>
+      <Column
+        style={{
+          marginTop: 20,
+        }}
+      >
+        <Text
+          style={{
+            marginBottom: 20,
+          }}
+        >
+          {
+            "Fetching the number of transactions that you have done to check eligibility"
+          }
+        </Text>
+        <Stack spacing="sm">{renderSubmitButton()}</Stack>
+        {proof && (
+          <>
+            <Column>
+              <QRCode
+                size={256}
+                style={{
+                  height: "auto",
+                  maxWidth: "100%",
+                  width: "100%",
+                  marginTop: 20,
+                  marginBottom: 20,
+                }}
+                value={proof.toString()}
+                viewBox={`0 0 256 256`}
+              />
+              <Stack spacing="sm">
+                <Button type="submit" onClick={verifyProofOnChain}>
+                  Verify on chain!
+                </Button>
+              </Stack>
+            </Column>
+          </>
+        )}
+      </Column>
     </>
   );
 }
