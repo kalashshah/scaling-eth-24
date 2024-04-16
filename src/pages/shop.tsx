@@ -4,6 +4,7 @@ import { useAccount } from "wagmi";
 
 const Shop = () => {
   const { isConnected } = useAccount();
+
   return (
     <>
       <Column>
