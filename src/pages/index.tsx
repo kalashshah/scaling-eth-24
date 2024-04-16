@@ -33,15 +33,6 @@ export default function GenerateProof() {
   const [publicSignals, sentPublicSignals] = useState<string[] | null>(null);
   const [qrCodeString, setQRCodeString] = useState<string | null>(null);
 
-  // useWatchContractEvent({
-  //   abi: abiPath.abi,
-  //   address: Addresses.TRANSACTION_VALIDATOR_ADDR,
-  //   eventName: "ProofResult",
-  //   onLogs: (logs) => {
-  //     console.log(`ProofResult logs: ${logs}`);
-  //   },
-  // });
-
   const handleGenerateProofSendTransaction = async (e: any) => {
     e.preventDefault();
     if (!address) {
@@ -49,19 +40,12 @@ export default function GenerateProof() {
       return;
     }
 
-    if (isVerified) {
-      //TODO : navigate
-      console.log("Verified!!");
-      return;
-    }
     setLoading(true);
     const input0 = await getTransactionCount(rainbowConfig, {
       address: address,
     });
 
     // const input0 = 3;
-
-    console.log({ input0 });
 
     // We will send an HTTP request with our inputs to our next.js backend to
     // request a proof to be generated.
@@ -84,11 +68,7 @@ export default function GenerateProof() {
       const { proof, publicSignals } = res.data;
       setProof(proof);
       sentPublicSignals(publicSignals);
-
-      setQRCodeString(res.data.toString());
-
-      // Write the transaction
-      // await executeTransaction(proof, publicSignals);
+      setQRCodeString(JSON.stringify({ address, proof, publicSignals }));
     } catch (err: any) {
       const statusCode = err?.response?.status;
       const errorMsg = err?.response?.data?.error;
@@ -103,6 +83,11 @@ export default function GenerateProof() {
 
   const verifyProofOnChain = async () => {
     if (!publicSignals) {
+      return;
+    }
+    if (isVerified) {
+      //TODO : navigate
+      console.log("Verified!!");
       return;
     }
     try {
@@ -133,7 +118,6 @@ export default function GenerateProof() {
       </Button>
     );
   };
-  console.log({ qrCodeString });
   return (
     <>
       <Column
@@ -154,18 +138,26 @@ export default function GenerateProof() {
         {proof && (
           <>
             <Column>
-              <QRCode
-                size={256}
+              <div
                 style={{
-                  height: "auto",
-                  maxWidth: "100%",
-                  width: "100%",
+                  padding: 10,
+                  backgroundColor: "white",
                   marginTop: 20,
                   marginBottom: 20,
+                  borderRadius: 16,
                 }}
-                value={proof.toString()}
-                viewBox={`0 0 256 256`}
-              />
+              >
+                <QRCode
+                  size={256}
+                  style={{
+                    height: "auto",
+                    maxWidth: "100%",
+                    width: "100%",
+                  }}
+                  value={qrCodeString ?? ""}
+                  viewBox={`0 0 256 256`}
+                />
+              </div>
               <Stack spacing="sm">
                 <Button type="submit" onClick={verifyProofOnChain}>
                   Verify on chain!

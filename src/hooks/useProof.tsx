@@ -12,8 +12,10 @@ import {
 const abiPath = require("../lib/abi/TransactionValidator.json");
 
 const useProof = () => {
-  const { writeContractAsync, data: hash } = useWriteContract();
-  const { data: txReceipt } = useWaitForTransactionReceipt({ hash });
+  const { writeContract, data: hash } = useWriteContract();
+  const { data: txReceipt, error } = useWaitForTransactionReceipt({ hash });
+
+  console.log({ hash, txReceipt, error });
 
   const { address } = useAccount();
 
@@ -47,22 +49,12 @@ const useProof = () => {
         }
       );
 
-      await writeContractAsync(
-        {
-          abi: abiPath.abi,
-          address: Addresses.TRANSACTION_VALIDATOR_ADDR,
-          functionName: "submitProof",
-          args: [proof, publicSignals, address],
-        },
-        {
-          onSuccess: (p) => {
-            console.log(`onSuccess params: ${p}`);
-          },
-          onError: (p) => {
-            console.log(`onError params: ${p}`);
-          },
-        }
-      );
+      writeContract({
+        abi: abiPath.abi,
+        address: Addresses.TRANSACTION_VALIDATOR_ADDR,
+        functionName: "submitProof",
+        args: [proof, publicSignals, address],
+      });
     } catch (err) {
       console.log(`Error executing transaction: ${err}`);
       notifications.show({

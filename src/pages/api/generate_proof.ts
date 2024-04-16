@@ -5,9 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log("hit")
   const body = req?.body;
-  console.log({body})
   if (body === undefined) {
     return res.status(403).json({ error: "Request has no body" });
   }
@@ -15,7 +13,6 @@ export default async function handler(
   const input0 = parseInt(body.input0);
 
   if (input0 === undefined || Number.isNaN(input0)) {
-    console.log({input0})
     return res.status(403).json({ error: "Invalid inputs" });
   }
   const proof = await generateProof(input0);
