@@ -9,6 +9,11 @@ import "../src/KitaiAirNFT.sol";
 import "../src/HazureAirNFT.sol";
 import "../src/ShopContract.sol";
 
+struct NFTListing {
+    address nftAddress;
+    uint256 price;
+}
+
 contract TransactionValidatorScript is Script {
     function setUp() public {}
 
@@ -22,15 +27,40 @@ contract TransactionValidatorScript is Script {
 
         // GnosisLoungeToken glt = new GnosisLoungeToken();
 
-        address gltToken = 0xA231E1899258016BB9AFa8a955860D68576697B4;
-        ShopContract shopContract = new ShopContract(gltToken);
+        // ShopContract shopContract = new ShopContract(gltToken);
 
-        KitaiAirNFT kitaiAirNFT = new KitaiAirNFT();
-        HazureAirNFT hazureAirNFT = new HazureAirNFT();
+        // KitaiAirNFT kitaiAirNFT = new KitaiAirNFT();
+        // HazureAirNFT hazureAirNFT = new HazureAirNFT();
 
-        kitaiAirNFT.addDistributors(address(shopContract));
-        hazureAirNFT.addDistributors(address(shopContract));
+        // kitaiAirNFT.addDistributors(address(shopContract));
+        // hazureAirNFT.addDistributors(address(shopContract));
+
+        addToShop();
 
         vm.stopBroadcast();
+    }
+
+    function transferTokenToUser(address userAddress) public {
+        address gltTokenAddress = 0xA231E1899258016BB9AFa8a955860D68576697B4;
+        GnosisLoungeToken glt = GnosisLoungeToken(gltTokenAddress);
+
+        glt.transfer(userAddress, 100 * (10 ** 18));
+    }
+
+    function addToShop() public {
+        address shopContractAddr = 0x6bcc580520c43f44E6F3841766914F76243ff286;
+        ShopContract shopContract = ShopContract(shopContractAddr);
+
+        address KitaiAirNFTAddr = 0xd71AF9C34f83c09389A101B8A0760B5866F6886E;
+        address HazureAirNFTAddr = 0x2881C0e106a10d5c580aEE52D132C2e175B9a797;
+
+        ShopContract.NFTListing memory kitaiAirNFTinstance = ShopContract
+            .NFTListing({nftAddress: KitaiAirNFTAddr, price: 10 * (10 ** 18)});
+
+        ShopContract.NFTListing memory hazureAirNFTinstance = ShopContract
+            .NFTListing({nftAddress: HazureAirNFTAddr, price: 20 * (10 ** 18)});
+
+        shopContract.addAirwayNfts(kitaiAirNFTinstance);
+        shopContract.addAirwayNfts(hazureAirNFTinstance);
     }
 }

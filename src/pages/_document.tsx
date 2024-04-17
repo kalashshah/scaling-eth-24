@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Moralis from "moralis";
 
 export default function Document() {
   return (

@@ -1,46 +1,42 @@
 import {
   Button,
   Column,
+  Header,
   HorizontalSpacer,
+  Row,
+  Typography,
 } from "@cred/neopop-web/lib/components";
+import Image from "next/image";
 import { useAccountModal } from "@rainbow-me/rainbowkit";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FontVariant } from "@cred/neopop-web/lib/primitives";
+import { useMoralis } from "@/hooks/useMoralis";
 
 const Home = () => {
-  const { openAccountModal } = useAccountModal();
-  const [proof, setProof] = useState<String | null>(null);
+  const { transaction } = useMoralis();
+
+  console.log(transaction);
 
   return (
-    <Column className="v-center">
-      <HorizontalSpacer n={3} />
-      <Button variant="secondary" kind="elevated" size="big">
-        Generate a Lounge QR
-      </Button>
-      <HorizontalSpacer n={3} />
-      <Button
-        variant="primary"
-        kind="elevated"
-        size="big"
-        showArrow
-        onClick={() => {
-          openAccountModal?.();
-        }}
-      >
-        Account Settings
-      </Button>
-      <>
-        <Button
-          onClick={async () => {
-            console.log("in button on click");
-            // const { proof, publicSignals } = await generateProof(2);
-            // setProof(proof);
+    <div style={{ margin: 16 }}>
+      <Row className="h-center v-start">
+        <Image
+          src={
+            "https://res.cloudinary.com/drlni3r6u/image/upload/v1713206376/gnosis-lounge/Gemini_Generated_Image_7mzo6r7mzo6r7mzo_mtjqv7.jpg"
+          }
+          alt="Gnosis Lounge"
+          width={50}
+          height={50}
+          style={{
+            borderRadius: "50%",
+            marginRight: 10,
           }}
-        >
-          Generate Proof
-        </Button>
-      </>
-      <>{proof && <p style={{ color: "white" }}>Proof is : {proof}</p>}</>
-    </Column>
+        />
+        <Typography {...FontVariant.CirkaHeadingBold20}>
+          Gnosis Lounge
+        </Typography>
+      </Row>
+    </div>
   );
 };
 

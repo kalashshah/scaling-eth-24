@@ -16,6 +16,8 @@ export interface NFT {
   address: string;
 }
 
+//user clicks on buy -> first approval is called, after approval mint is called automatically
+
 const useShop = () => {
   const [currentNFT, setCurrentNFT] = useState<NFT | null>(null);
   const { data: hashShop, writeContractAsync: writeShopContract } =
