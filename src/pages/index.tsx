@@ -1,17 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import {
-  Stack,
-  Text,
-  Title,
-  Grid,
-  Input,
-  Button,
-  Group,
-  Space,
-} from "@mantine/core";
+import { useEffect, useState } from "react";
+import { Stack, Text, Title, Grid, Input, Group, Space } from "@mantine/core";
 import axios, { AxiosRequestConfig } from "axios";
 import { useAccount, useWatchContractEvent } from "wagmi";
 import { notifications } from "@mantine/notifications";
@@ -20,8 +11,14 @@ import useProof from "@/hooks/useProof";
 import { Addresses } from "@/shared/addresses";
 import { getTransactionCount } from "wagmi/actions";
 import { rainbowConfig } from "@/config/rainbowkit";
-import { Column } from "@cred/neopop-web/lib/components";
+import {
+  Column,
+  VerticalSpacer,
+  Button,
+  Row,
+} from "@cred/neopop-web/lib/components";
 import QRCode from "react-qr-code";
+import { useRouter } from "next/router";
 const abiPath = require("../lib/abi/TransactionValidator.json");
 
 export default function GenerateProof() {
@@ -32,6 +29,14 @@ export default function GenerateProof() {
   const [proof, setProof] = useState<string | null>(null);
   const [publicSignals, sentPublicSignals] = useState<string[] | null>(null);
   const [qrCodeString, setQRCodeString] = useState<string | null>(null);
+  const [allowMint, setAllowMint] = useState<boolean>(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isVerified) {
+      setAllowMint(true);
+    }
+  }, [isVerified]);
 
   const handleGenerateProofSendTransaction = async (e: any) => {
     e.preventDefault();
@@ -94,9 +99,10 @@ export default function GenerateProof() {
       // Write the transaction
       await executeTransaction(proof, publicSignals);
       notifications.show({
-        message: "Proof generated successfully! Submitting transaction...",
+        message: "Submitted transaction successfully!",
         color: "green",
       });
+      setAllowMint(true);
     } catch (err: any) {
       const statusCode = err?.response?.status;
       const errorMsg = err?.response?.data?.error;
@@ -113,7 +119,13 @@ export default function GenerateProof() {
       return <ConnectWalletButton />;
     }
     return (
-      <Button type="submit" onClick={handleGenerateProofSendTransaction}>
+      <Button
+        onClick={handleGenerateProofSendTransaction}
+        variant="primary"
+        kind="elevated"
+        size="big"
+        colorMode="light"
+      >
         {loading ? "loading..." : "Generate Proof & Send Transaction"}
       </Button>
     );
@@ -134,7 +146,7 @@ export default function GenerateProof() {
             "Fetching the number of transactions that you have done to check eligibility"
           }
         </Text>
-        <Stack spacing="sm">{renderSubmitButton()}</Stack>
+        <Row className="h-center">{renderSubmitButton()}</Row>
         {proof && (
           <>
             <Column>
@@ -158,11 +170,51 @@ export default function GenerateProof() {
                   viewBox={`0 0 256 256`}
                 />
               </div>
-              <Stack spacing="sm">
-                <Button type="submit" onClick={verifyProofOnChain}>
-                  Verify on chain!
-                </Button>
-              </Stack>
+              <Row className="v-justify">
+                {!allowMint && (
+                  <Button
+                    onClick={verifyProofOnChain}
+                    variant="primary"
+                    kind="elevated"
+                    size="big"
+                    colorMode="light"
+                  >
+                    Verify on chain!
+                  </Button>
+                )}
+                {allowMint && (
+                  <>
+                    <Button
+                      variant="primary"
+                      kind="elevated"
+                      size="big"
+                      colorMode="light"
+                      showArrow
+                      style={{ marginRight: 10 }}
+                      onClick={() => {
+                        router.push("/lounge");
+                      }}
+                    >
+                      Continue to Lounge
+                    </Button>
+                    <a
+                      href="https://poap.website/and-whom-evidence"
+                      target={"_blank"}
+                      rel={"noreferrer"}
+                    >
+                      <Button
+                        variant="primary"
+                        kind="elevated"
+                        size="big"
+                        colorMode="light"
+                        showArrow
+                      >
+                        Mint your POAP!
+                      </Button>
+                    </a>
+                  </>
+                )}
+              </Row>
             </Column>
           </>
         )}

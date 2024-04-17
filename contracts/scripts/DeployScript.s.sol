@@ -7,6 +7,7 @@ import "../src/TransactionValidator.sol";
 import "../src/GnosisLoungeToken.sol";
 import "../src/KitaiAirNFT.sol";
 import "../src/HazureAirNFT.sol";
+import "../src/ShopContract.sol";
 
 contract TransactionValidatorScript is Script {
     function setUp() public {}
@@ -21,8 +22,14 @@ contract TransactionValidatorScript is Script {
 
         // GnosisLoungeToken glt = new GnosisLoungeToken();
 
+        address gltToken = 0xA231E1899258016BB9AFa8a955860D68576697B4;
+        ShopContract shopContract = new ShopContract(gltToken);
+
         KitaiAirNFT kitaiAirNFT = new KitaiAirNFT();
         HazureAirNFT hazureAirNFT = new HazureAirNFT();
+
+        kitaiAirNFT.addDistributors(address(shopContract));
+        hazureAirNFT.addDistributors(address(shopContract));
 
         vm.stopBroadcast();
     }

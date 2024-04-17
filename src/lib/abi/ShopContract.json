@@ -1,0 +1,262 @@
+{
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
+        { "name": "tokenAddress", "type": "address", "internalType": "address" }
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "GLTaddress",
+      "inputs": [],
+      "outputs": [{ "name": "", "type": "address", "internalType": "address" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "addAirwayNfts",
+      "inputs": [
+        {
+          "name": "nft",
+          "type": "tuple",
+          "internalType": "struct ShopContract.NFTListing",
+          "components": [
+            {
+              "name": "nftAddress",
+              "type": "address",
+              "internalType": "address"
+            },
+            { "name": "price", "type": "uint256", "internalType": "uint256" }
+          ]
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "addressToNFTIndex",
+      "inputs": [{ "name": "", "type": "address", "internalType": "address" }],
+      "outputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "airwayNFTs",
+      "inputs": [{ "name": "", "type": "uint256", "internalType": "uint256" }],
+      "outputs": [
+        { "name": "nftAddress", "type": "address", "internalType": "address" },
+        { "name": "price", "type": "uint256", "internalType": "uint256" }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "buyNFT",
+      "inputs": [
+        { "name": "nftAddress", "type": "address", "internalType": "address" }
+      ],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "event",
+      "name": "NFTBought",
+      "inputs": [
+        {
+          "name": "buyerAddress",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "nftAddress",
+          "type": "address",
+          "indexed": false,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    }
+  ],
+  "bytecode": {
+    "object": "0x6080604052348015600f57600080fd5b50604051610544380380610544833981016040819052602c916059565b600180546001600160a01b039092166001600160a01b031992831617905560048054909116331790556087565b600060208284031215606a57600080fd5b81516001600160a01b0381168114608057600080fd5b9392505050565b6104ae806100966000396000f3fe60806040526004361061004a5760003560e01c80636b3a84941461004f5780636c386c1d1461008c57806375d5766e146100c7578063ba79b56414610106578063bd3bb9311461011b575b600080fd5b34801561005b57600080fd5b5060015461006f906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b34801561009857600080fd5b506100b96100a73660046103a0565b60036020526000908152604090205481565b604051908152602001610083565b3480156100d357600080fd5b506100e76100e23660046103c2565b61013b565b604080516001600160a01b039093168352602083019190915201610083565b6101196101143660046103a0565b610173565b005b34801561012757600080fd5b506101196101363660046103db565b6102d5565b6002818154811061014b57600080fd5b6000918252602090912060029091020180546001909101546001600160a01b03909116915082565b6001600160a01b0381166000908152600360205260408120546002805490919081106101a1576101a1610440565b60009182526020909120600160029092020181015490546040516323b872dd60e01b8152336004820152306024820152604481018390529192506001600160a01b0316906323b872dd906064016020604051808303816000875af115801561020d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102319190610456565b61023a57600080fd5b6040516340d097c360e01b81523360048201526001600160a01b038316906340d097c390602401600060405180830381600087803b15801561027b57600080fd5b505af115801561028f573d6000803e3d6000fd5b50506040516001600160a01b03851681523392507f5985c46418ad0365a68cc6514ef0028df568e94a7e1c36e4a039caa341710e8f915060200160405180910390a25050565b6004546001600160a01b031633146102ec57600080fd5b6002805482516001600160a01b03908116600090815260036020908152604082208490556001840185559084905284517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace9390940292830180546001600160a01b031916949092169390931790559101517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acf90910155565b80356001600160a01b038116811461039b57600080fd5b919050565b6000602082840312156103b257600080fd5b6103bb82610384565b9392505050565b6000602082840312156103d457600080fd5b5035919050565b6000604082840312156103ed57600080fd5b6040516040810181811067ffffffffffffffff8211171561041e57634e487b7160e01b600052604160045260246000fd5b60405261042a83610384565b8152602083013560208201528091505092915050565b634e487b7160e01b600052603260045260246000fd5b60006020828403121561046857600080fd5b815180151581146103bb57600080fdfea26469706673582212206623e099ae096b7b2713859edf59c3cadaa739186c244433644e09d5137b69fb64736f6c63430008190033",
+    "sourceMap": "283:1019:15:-:0;;;638:111;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;682:10;:25;;-1:-1:-1;;;;;682:25:15;;;-1:-1:-1;;;;;;682:25:15;;;;;;717:12;:25;;;;;732:10;717:25;;;283:1019;;14:290:16;84:6;137:2;125:9;116:7;112:23;108:32;105:52;;;153:1;150;143:12;105:52;179:16;;-1:-1:-1;;;;;224:31:16;;214:42;;204:70;;270:1;267;260:12;204:70;293:5;14:290;-1:-1:-1;;;14:290:16:o;:::-;283:1019:15;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x60806040526004361061004a5760003560e01c80636b3a84941461004f5780636c386c1d1461008c57806375d5766e146100c7578063ba79b56414610106578063bd3bb9311461011b575b600080fd5b34801561005b57600080fd5b5060015461006f906001600160a01b031681565b6040516001600160a01b0390911681526020015b60405180910390f35b34801561009857600080fd5b506100b96100a73660046103a0565b60036020526000908152604090205481565b604051908152602001610083565b3480156100d357600080fd5b506100e76100e23660046103c2565b61013b565b604080516001600160a01b039093168352602083019190915201610083565b6101196101143660046103a0565b610173565b005b34801561012757600080fd5b506101196101363660046103db565b6102d5565b6002818154811061014b57600080fd5b6000918252602090912060029091020180546001909101546001600160a01b03909116915082565b6001600160a01b0381166000908152600360205260408120546002805490919081106101a1576101a1610440565b60009182526020909120600160029092020181015490546040516323b872dd60e01b8152336004820152306024820152604481018390529192506001600160a01b0316906323b872dd906064016020604051808303816000875af115801561020d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102319190610456565b61023a57600080fd5b6040516340d097c360e01b81523360048201526001600160a01b038316906340d097c390602401600060405180830381600087803b15801561027b57600080fd5b505af115801561028f573d6000803e3d6000fd5b50506040516001600160a01b03851681523392507f5985c46418ad0365a68cc6514ef0028df568e94a7e1c36e4a039caa341710e8f915060200160405180910390a25050565b6004546001600160a01b031633146102ec57600080fd5b6002805482516001600160a01b03908116600090815260036020908152604082208490556001840185559084905284517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5ace9390940292830180546001600160a01b031916949092169390931790559101517f405787fa12a823e0f2b7631cc41b3ba8828b3321ca811111fa75cd3aa3bb5acf90910155565b80356001600160a01b038116811461039b57600080fd5b919050565b6000602082840312156103b257600080fd5b6103bb82610384565b9392505050565b6000602082840312156103d457600080fd5b5035919050565b6000604082840312156103ed57600080fd5b6040516040810181811067ffffffffffffffff8211171561041e57634e487b7160e01b600052604160045260246000fd5b60405261042a83610384565b8152602083013560208201528091505092915050565b634e487b7160e01b600052603260045260246000fd5b60006020828403121561046857600080fd5b815180151581146103bb57600080fdfea26469706673582212206623e099ae096b7b2713859edf59c3cadaa739186c244433644e09d5137b69fb64736f6c63430008190033",
+    "sourceMap": "283:1019:15:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;486:25;;;;;;;;;;-1:-1:-1;486:25:15;;;;-1:-1:-1;;;;;486:25:15;;;;;;-1:-1:-1;;;;;178:32:16;;;160:51;;148:2;133:18;486:25:15;;;;;;;;553:52;;;;;;;;;;-1:-1:-1;553:52:15;;;;;:::i;:::-;;;;;;;;;;;;;;;;;737:25:16;;;725:2;710:18;553:52:15;591:177:16;517:30:15;;;;;;;;;;-1:-1:-1;517:30:15;;;;;:::i;:::-;;:::i;:::-;;;;-1:-1:-1;;;;;1150:32:16;;;1132:51;;1214:2;1199:18;;1192:34;;;;1105:18;517:30:15;958:274:16;959:341:15;;;;;;:::i;:::-;;:::i;:::-;;755:198;;;;;;;;;;-1:-1:-1;755:198:15;;;;;:::i;:::-;;:::i;517:30::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;517:30:15;;;;-1:-1:-1;517:30:15;:::o;959:341::-;-1:-1:-1;;;;;1047:29:15;;1020:13;1047:29;;;:17;:29;;;;;;1036:10;:41;;:10;;1047:29;1036:41;;;;;;:::i;:::-;;;;;;;;;:47;:41;;;;;:47;;;1121:10;;1114:65;;-1:-1:-1;;;1114:65:15;;1146:10;1114:65;;;2224:34:16;1166:4:15;2274:18:16;;;2267:43;2326:18;;;2319:34;;;1036:47:15;;-1:-1:-1;;;;;;1121:10:15;;1114:31;;2159:18:16;;1114:65:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;1093:96;;;;;;1199:45;;-1:-1:-1;;;1199:45:15;;1233:10;1199:45;;;160:51:16;-1:-1:-1;;;;;1199:33:15;;;;;133:18:16;;1199:45:15;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;1260:33:15;;-1:-1:-1;;;;;178:32:16;;160:51;;1270:10:15;;-1:-1:-1;1260:33:15;;-1:-1:-1;148:2:16;133:18;1260:33:15;;;;;;;1010:290;959:341;:::o;755:198::-;826:12;;-1:-1:-1;;;;;826:12:15;842:10;826:26;818:35;;;;;;899:10;:17;;881:14;;-1:-1:-1;;;;;863:33:15;;;;;;;:17;:33;;;;;;;:53;;;926:20;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;926:20:15;;;;;;;;;;;;;;;;;;;755:198::o;222:173:16:-;290:20;;-1:-1:-1;;;;;339:31:16;;329:42;;319:70;;385:1;382;375:12;319:70;222:173;;;:::o;400:186::-;459:6;512:2;500:9;491:7;487:23;483:32;480:52;;;528:1;525;518:12;480:52;551:29;570:9;551:29;:::i;:::-;541:39;400:186;-1:-1:-1;;;400:186:16:o;773:180::-;832:6;885:2;873:9;864:7;860:23;856:32;853:52;;;901:1;898;891:12;853:52;-1:-1:-1;924:23:16;;773:180;-1:-1:-1;773:180:16:o;1237:610::-;1324:6;1377:2;1365:9;1356:7;1352:23;1348:32;1345:52;;;1393:1;1390;1383:12;1345:52;1426:2;1420:9;1468:2;1460:6;1456:15;1537:6;1525:10;1522:22;1501:18;1489:10;1486:34;1483:62;1480:185;;;1587:10;1582:3;1578:20;1575:1;1568:31;1622:4;1619:1;1612:15;1650:4;1647:1;1640:15;1480:185;1681:2;1674:22;1720:29;1739:9;1720:29;:::i;:::-;1712:6;1705:45;1811:2;1800:9;1796:18;1783:32;1778:2;1770:6;1766:15;1759:57;1835:6;1825:16;;;1237:610;;;;:::o;1852:127::-;1913:10;1908:3;1904:20;1901:1;1894:31;1944:4;1941:1;1934:15;1968:4;1965:1;1958:15;2364:277;2431:6;2484:2;2472:9;2463:7;2459:23;2455:32;2452:52;;;2500:1;2497;2490:12;2452:52;2532:9;2526:16;2585:5;2578:13;2571:21;2564:5;2561:32;2551:60;;2607:1;2604;2597:12",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "GLTaddress()": "6b3a8494",
+    "addAirwayNfts((address,uint256))": "bd3bb931",
+    "addressToNFTIndex(address)": "6c386c1d",
+    "airwayNFTs(uint256)": "75d5766e",
+    "buyNFT(address)": "ba79b564"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.25+commit.b61c2a91\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddress\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"buyerAddress\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"nftAddress\",\"type\":\"address\"}],\"name\":\"NFTBought\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"GLTaddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"nftAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"internalType\":\"struct ShopContract.NFTListing\",\"name\":\"nft\",\"type\":\"tuple\"}],\"name\":\"addAirwayNfts\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"addressToNFTIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"airwayNFTs\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"nftAddress\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"nftAddress\",\"type\":\"address\"}],\"name\":\"buyNFT\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/ShopContract.sol\":\"ShopContract\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/\",\":forge-std/=lib/forge-std/src/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\"]},\"sources\":{\"lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://0ea104e577e63faea3b69c415637e99e755dcbf64c5833d7140c35a714d6d90c\",\"dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq\"]},\"lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol\":{\"keccak256\":\"0x5ef46daa3b58ef2702279d514780316efaa952915ee1aa3396f041ee2982b0b4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://2f8f2a76e23b02fc69e8cd24c3cb47da6c7af3a2d6c3a382f8ac25c6e094ade7\",\"dweb:/ipfs/QmPV4ZS4tPVv4mTCf9ejyZ1ai57EEibDRj7mN2ARDCLV5n\"]},\"lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol\":{\"keccak256\":\"0x4296879f55019b23e135000eb36896057e7101fb7fb859c5ef690cf14643757b\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://87b3541437c8c443ccd36795e56a338ed12855eec17f8da624511b8d1a7e14df\",\"dweb:/ipfs/QmeJQCtZrQjtJLr6u7ZHWeH3pBnjtLWzvRrKViAi7UZqxL\"]},\"src/ShopContract.sol\":{\"keccak256\":\"0x4b24260f4ae70f9c32832f476fd01424ff60435af9220fe3f552ff93ca139339\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://432af5f8c87606383cff79ac181f58a679e9b8c8240d1d39c0ddeb531ed0c994\",\"dweb:/ipfs/QmbN7kFmt2sZZuA2JfqHRDGWa2qGigRJYUTvdqLmEe74rp\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": { "version": "0.8.25+commit.b61c2a91" },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "tokenAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "buyerAddress",
+              "type": "address",
+              "indexed": true
+            },
+            {
+              "internalType": "address",
+              "name": "nftAddress",
+              "type": "address",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "NFTBought",
+          "anonymous": false
+        },
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "GLTaddress",
+          "outputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct ShopContract.NFTListing",
+              "name": "nft",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "nftAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "uint256",
+                  "name": "price",
+                  "type": "uint256"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "addAirwayNfts"
+        },
+        {
+          "inputs": [
+            { "internalType": "address", "name": "", "type": "address" }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "addressToNFTIndex",
+          "outputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ]
+        },
+        {
+          "inputs": [
+            { "internalType": "uint256", "name": "", "type": "uint256" }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "airwayNFTs",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "nftAddress",
+              "type": "address"
+            },
+            { "internalType": "uint256", "name": "price", "type": "uint256" }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "nftAddress",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "payable",
+          "type": "function",
+          "name": "buyNFT"
+        }
+      ],
+      "devdoc": { "kind": "dev", "methods": {}, "version": 1 },
+      "userdoc": { "kind": "user", "methods": {}, "version": 1 }
+    },
+    "settings": {
+      "remappings": [
+        "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+        "forge-std/=lib/forge-std/src/",
+        "openzeppelin-contracts/=lib/openzeppelin-contracts/"
+      ],
+      "optimizer": { "enabled": true, "runs": 200 },
+      "metadata": { "bytecodeHash": "ipfs" },
+      "compilationTarget": { "src/ShopContract.sol": "ShopContract" },
+      "evmVersion": "paris",
+      "libraries": {}
+    },
+    "sources": {
+      "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol": {
+        "keccak256": "0xc6a8ff0ea489379b61faa647490411b80102578440ab9d84e9a957cc12164e70",
+        "urls": [
+          "bzz-raw://0ea104e577e63faea3b69c415637e99e755dcbf64c5833d7140c35a714d6d90c",
+          "dweb:/ipfs/Qmau6x4Ns9XdyynRCNNp3RhLqijJjFm7z5fyZazfYFGYdq"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/token/ERC721/IERC721.sol": {
+        "keccak256": "0x5ef46daa3b58ef2702279d514780316efaa952915ee1aa3396f041ee2982b0b4",
+        "urls": [
+          "bzz-raw://2f8f2a76e23b02fc69e8cd24c3cb47da6c7af3a2d6c3a382f8ac25c6e094ade7",
+          "dweb:/ipfs/QmPV4ZS4tPVv4mTCf9ejyZ1ai57EEibDRj7mN2ARDCLV5n"
+        ],
+        "license": "MIT"
+      },
+      "lib/openzeppelin-contracts/contracts/utils/introspection/IERC165.sol": {
+        "keccak256": "0x4296879f55019b23e135000eb36896057e7101fb7fb859c5ef690cf14643757b",
+        "urls": [
+          "bzz-raw://87b3541437c8c443ccd36795e56a338ed12855eec17f8da624511b8d1a7e14df",
+          "dweb:/ipfs/QmeJQCtZrQjtJLr6u7ZHWeH3pBnjtLWzvRrKViAi7UZqxL"
+        ],
+        "license": "MIT"
+      },
+      "src/ShopContract.sol": {
+        "keccak256": "0x4b24260f4ae70f9c32832f476fd01424ff60435af9220fe3f552ff93ca139339",
+        "urls": [
+          "bzz-raw://432af5f8c87606383cff79ac181f58a679e9b8c8240d1d39c0ddeb531ed0c994",
+          "dweb:/ipfs/QmbN7kFmt2sZZuA2JfqHRDGWa2qGigRJYUTvdqLmEe74rp"
+        ],
+        "license": "GPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "id": 15
+}
