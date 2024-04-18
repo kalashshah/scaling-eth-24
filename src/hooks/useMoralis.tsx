@@ -1,12 +1,12 @@
 import Moralis from "moralis";
 import { useAccount } from "wagmi";
 import { useEffect, useState } from "react";
-import { EvmChain } from "@moralisweb3/common-evm-utils";
+import { EvmChain, EvmTransaction } from "@moralisweb3/common-evm-utils";
 
 export const useMoralis = () => {
   const { address } = useAccount();
 
-  const [transaction, setTransactions] = useState<any>([]);
+  const [transaction, setTransactions] = useState<EvmTransaction[]>([]);
   const [moralisInit, setMoralisInit] = useState<boolean>(false);
 
   const initMoralis = async () => {
