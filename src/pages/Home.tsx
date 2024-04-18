@@ -155,8 +155,7 @@ const Home = () => {
                 color={"white"}
                 style={{ marginLeft: 6, marginBottom: 8, marginRight: 10 }}
               >
-                {transaction.map((e) => {
-                  var transactionObject = e.toJSON();
+                {transaction.map((e: any) => {
                   return (
                     <>
                       <ElevatedCard
@@ -175,7 +174,7 @@ const Home = () => {
                             margin: 10,
                           }}
                         >
-                          {truncateHexString(transactionObject.from)}
+                          {truncateHexString(e.from)}
                         </Row>
                       </ElevatedCard>
                     </>
