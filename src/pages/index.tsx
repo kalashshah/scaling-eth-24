@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { ConnectWalletButton } from "@/components/ConnectWalletButton";
-import { Column, Row, Typography } from "@cred/neopop-web/lib/components";
+import {
+  Button,
+  Column,
+  Row,
+  Typography,
+} from "@cred/neopop-web/lib/components";
 
 import dynamic from "next/dynamic";
 
@@ -11,6 +16,7 @@ import { FontVariant } from "@cred/neopop-web/lib/primitives";
 import Image from "next/image";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
+import bg from "../../public/gnosishome.png";
 
 const IndexPage = () => {
   const { isConnected } = useAccount();
@@ -45,19 +51,16 @@ const IndexPage = () => {
                 marginRight: 10,
               }}
             />
+
             <Typography {...FontVariant.CirkaHeadingBold20}>
               Gnosis Lounge
             </Typography>
           </Row>
         </Row>
       </div>
-      <div
-        style={{
-          marginBottom: 20,
-        }}
-      >
+      <div>
         <Column className="v-center">
-          <Lottie
+          {/* <Lottie
             loop
             animationData={lottieJson}
             play
@@ -68,15 +71,59 @@ const IndexPage = () => {
               marginTop: 20,
               marginBottom: "10%",
             }}
+          /> */}
+          <Image
+            src="/gnosishome.png"
+            alt="Gnosis Lounge"
+            width={400}
+            height={450}
+            style={{
+              margin: 20,
+              padding: 20,
+            }}
           />
-          <Typography {...FontVariant.HeadingSemiBold16}>
-            Exclusively for Gnosis card holders
+        </Column>
+        <Column
+          style={{
+            marginLeft: 30,
+          }}
+        >
+          <Typography
+            {...FontVariant.HeadingSemiBold16}
+            style={{
+              fontSize: 80,
+              marginBottom: 80,
+            }}
+          >
+            Unlock...
+          </Typography>
+          <Typography
+            {...FontVariant.HeadingSemiBold16}
+            style={{
+              fontSize: 70,
+              marginBottom: 80,
+            }}
+          >
+            Earn..
+          </Typography>
+          <Typography
+            {...FontVariant.HeadingSemiBold16}
+            style={{
+              fontSize: 60,
+              marginBottom: 80,
+            }}
+          >
+            Redeem.
           </Typography>
         </Column>
       </div>
-      <Row className="h-center v-center">
+      <div
+        style={{
+          width: "100%",
+        }}
+      >
         <ConnectWalletButton />
-      </Row>
+      </div>
     </>
   );
 };

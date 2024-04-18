@@ -31,8 +31,15 @@ export const ConnectWalletButton = () => {
         openConnectModal?.();
         openAccountModal?.();
       }}
+      style={{
+        width: 345,
+        color: "white",
+        backgroundColor: "white",
+        marginLeft: 60,
+      }}
+      showArrow
     >
-      {renderConnectText()}
+      <>Connect Wallet And Unlock Rewards</>
     </Button>
   );
 };
