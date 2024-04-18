@@ -11,7 +11,7 @@ const withAuth = <P extends object>(
 
     useEffect(() => {
       if (!isConnected) router.push("/");
-    }, []);
+    }, [isConnected]);
 
     return isConnected ? <WrappedComponent {...props} /> : null;
   };

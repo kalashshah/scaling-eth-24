@@ -8,14 +8,12 @@ import {
   Row,
   Button,
   Typography,
-  HorizontalSpacer,
 } from "@cred/neopop-web/lib/components";
 import { FontVariant } from "@cred/neopop-web/lib/primitives";
 import { notifications } from "@mantine/notifications";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React from "react";
 
 const nfts: Array<NFT> = [
   {
@@ -23,7 +21,7 @@ const nfts: Array<NFT> = [
     image:
       "https://res.cloudinary.com/drlni3r6u/image/upload/v1713206376/gnosis-lounge/Gemini_Generated_Image_ta5hmita5hmita5h_yxtwx9.jpg",
     price: 10,
-    address: Addresses.HAZURE_NFT_ADDR,
+    address: Addresses.KITAI_NFT_ADDR,
   },
   {
     name: "Hazure Air NFT",
@@ -107,8 +105,23 @@ const Lounge = () => {
                     alt={nft.name}
                     width={397}
                     height={397}
+                    style={{ zIndex: 0, position: "absolute" }}
                   />
-                  <NFTDataContaner>
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      zIndex: 10,
+                      paddingTop: 16,
+                      paddingBottom: 16,
+                      paddingLeft: 16,
+                      borderTopLeftRadius: 8,
+                      borderTopRightRadius: 8,
+                      backdropFilter: "blur(2px)",
+                    }}
+                  >
                     <Typography
                       {...FontVariant.BodyRegular16}
                       color={"white"}
@@ -124,7 +137,7 @@ const Lounge = () => {
                     >
                       Buy for {nft.price}
                     </Button>
-                  </NFTDataContaner>
+                  </div>
                 </ElevatedCard>
               </>
             );
@@ -134,21 +147,5 @@ const Lounge = () => {
     </>
   );
 };
-
-const NFTDataContaner = styled.div`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 16px;
-  backdrop-filter: blur(2px);
-  padding-bottom: 16px;
-  padding-left: 16px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  z-index: 1;
-`;
 
 export default Lounge;

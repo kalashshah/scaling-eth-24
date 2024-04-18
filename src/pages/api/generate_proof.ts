@@ -10,7 +10,8 @@ export default async function handler(
     return res.status(403).json({ error: "Request has no body" });
   }
 
-  const input0 = parseInt(body.input0);
+  let input0 = parseInt(body.input0);
+  input0 = Math.min(31, input0);
 
   if (input0 === undefined || Number.isNaN(input0)) {
     return res.status(403).json({ error: "Invalid inputs" });

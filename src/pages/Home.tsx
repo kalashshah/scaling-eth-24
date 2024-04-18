@@ -2,20 +2,20 @@ import {
   Button,
   Column,
   ElevatedCard,
-  Header,
-  HorizontalSpacer,
   Row,
   Typography,
 } from "@cred/neopop-web/lib/components";
 import Image from "next/image";
-import { useAccountModal } from "@rainbow-me/rainbowkit";
-import { useEffect, useState } from "react";
+
 import { FontVariant } from "@cred/neopop-web/lib/primitives";
 import { useMoralis } from "@/hooks/useMoralis";
 import usePOAP from "@/hooks/usePOAP";
 import lottieJson from "../../assets/transactions_empty.json";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import withAuth from "@/components/withAuth";
+import Card from "@/components/Card";
+import { useAccountModal } from "@rainbow-me/rainbowkit";
 const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 function truncateHexString(hexString: string): string {
@@ -29,31 +29,33 @@ const Home = () => {
   const { transaction } = useMoralis();
   const { userPoaps } = usePOAP();
   const router = useRouter();
+  const { openAccountModal } = useAccountModal();
 
   return (
     <div style={{ margin: 16 }}>
       <Row className="v-justify">
-        <Row className="h-center v-start">
-          <Image
-            src={
-              "https://res.cloudinary.com/drlni3r6u/image/upload/v1713206376/gnosis-lounge/Gemini_Generated_Image_7mzo6r7mzo6r7mzo_mtjqv7.jpg"
-            }
-            alt="Gnosis Lounge"
-            width={50}
-            height={50}
-            style={{
-              borderRadius: "50%",
-              marginRight: 10,
-            }}
-          />
-          <Typography {...FontVariant.CirkaHeadingBold20}>
-            Gnosis Lounge
-          </Typography>
-        </Row>
+        <div onClick={openAccountModal}>
+          <Row className="h-center v-start">
+            <Image
+              src={
+                "https://res.cloudinary.com/drlni3r6u/image/upload/v1713206376/gnosis-lounge/Gemini_Generated_Image_7mzo6r7mzo6r7mzo_mtjqv7.jpg"
+              }
+              alt="Gnosis Lounge"
+              width={50}
+              height={50}
+              style={{
+                borderRadius: "50%",
+                marginRight: 10,
+              }}
+            />
+            <Typography {...FontVariant.CirkaHeadingBold20}>
+              Gnosis Lounge
+            </Typography>
+          </Row>
+        </div>
         <Button
           onClick={() => {
-            //TODO : set navigation properly
-            router.push("/auth-page");
+            router.push("/proof");
           }}
           variant="primary"
           kind="elevated"
@@ -64,6 +66,8 @@ const Home = () => {
         </Button>
       </Row>
 
+      <Card />
+
       <Column
         style={{
           marginTop: 16,
@@ -72,9 +76,14 @@ const Home = () => {
         {userPoaps.length != 0 && (
           <>
             <Typography
-              {...FontVariant.BodyRegular32}
+              {...FontVariant.CirkaHeadingBold20}
               color={"white"}
-              style={{ marginLeft: 6, marginBottom: 8, marginRight: 10 }}
+              style={{
+                marginLeft: 6,
+                marginBottom: 4,
+                marginRight: 10,
+                marginTop: 20,
+              }}
             >
               Your POAP Collection
             </Typography>
@@ -93,10 +102,10 @@ const Home = () => {
                     }}
                   >
                     <ElevatedCard
-                      backgroundColor="#AE275F"
+                      backgroundColor="#244B3B"
                       edgeColors={{
-                        bottom: "#5C1532",
-                        right: "#851E49",
+                        bottom: "#E0E0E0",
+                        right: "#E0E0E0",
                       }}
                       style={{
                         width: "100%",
@@ -131,7 +140,9 @@ const Home = () => {
                           />
                         </div>
 
-                        {e.event.name}
+                        <Typography {...FontVariant.CapsBold10}>
+                          {e.event.name}
+                        </Typography>
                       </Column>
                     </ElevatedCard>
                   </div>
@@ -143,48 +154,48 @@ const Home = () => {
         {
           <>
             <Typography
-              {...FontVariant.BodyRegular32}
+              {...FontVariant.CirkaHeadingBold20}
               color={"white"}
-              style={{ marginLeft: 6, marginBottom: 8, marginRight: 10 }}
+              style={{
+                marginLeft: 6,
+                marginBottom: 8,
+                marginRight: 10,
+                marginTop: 20,
+              }}
             >
               Your Latest Transactions
             </Typography>
             {transaction.length > 0 ? (
-              <Typography
-                {...FontVariant.BodyRegular16}
-                color={"white"}
-                style={{ marginLeft: 6, marginBottom: 8, marginRight: 10 }}
-              >
+              <>
                 {transaction.map((e: any) => {
                   return (
                     <>
                       <ElevatedCard
-                        backgroundColor="#AE275F"
-                        edgeColors={{
-                          bottom: "#5C1532",
-                          right: "#851E49",
-                        }}
-                        style={{
-                          width: "100%",
-                          margin: 10,
-                        }}
+                        backgroundColor="black"
+                        edgeColors={{ bottom: "#244B3B", right: "#244B3B" }}
+                        style={{ width: "95%", margin: 20 }}
                       >
-                        <Row
-                          style={{
-                            margin: 10,
-                          }}
-                        >
-                          {truncateHexString(e.from)}
+                        <Row style={{ margin: 10 }}>
+                          <Typography
+                            {...FontVariant.BodyRegular16}
+                            color={"white"}
+                            style={{
+                              marginLeft: 6,
+                              marginBottom: 8,
+                            }}
+                          >
+                            {truncateHexString(e.from)}
+                          </Typography>
                         </Row>
                       </ElevatedCard>
                     </>
                   );
                 })}
-              </Typography>
+              </>
             ) : (
               <>
                 {/* TODO: replace asset */}
-                <Lottie
+                {/* <Lottie
                   loop
                   animationData={lottieJson}
                   play
@@ -195,7 +206,7 @@ const Home = () => {
                     marginTop: 20,
                     marginBottom: "10%",
                   }}
-                />
+                /> */}
               </>
             )}
           </>
@@ -205,4 +216,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);

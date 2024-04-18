@@ -1,11 +1,6 @@
 import { Addresses } from "@/shared/addresses";
 import { notifications } from "@mantine/notifications";
-import { useEffect, useState } from "react";
-import {
-  useTransactionConfirmations,
-  useWaitForTransactionReceipt,
-  useWriteContract,
-} from "wagmi";
+import { ethers } from "ethers";
 const shopPath = require("../lib/abi/ShopContract.json");
 const erc20Path = require("../lib/abi/GnosisLoungeToken.json");
 
@@ -17,48 +12,57 @@ export interface NFT {
 }
 
 //user clicks on buy -> first approval is called, after approval mint is called automatically
-
 const useShop = () => {
-  const [currentNFT, setCurrentNFT] = useState<NFT | null>(null);
-  const { data: hashShop, writeContractAsync: writeShopContract } =
-    useWriteContract();
-  const { data: hashErc20, writeContractAsync: writeERC20Contract } =
-    useWriteContract();
-  const { data: erc20AllowReceipt } = useWaitForTransactionReceipt({
-    hash: hashErc20,
-  });
-
   const buyNft = async (nft: NFT) => {
-    setCurrentNFT(nft);
-    await writeERC20Contract({
-      address: Addresses.GLT_ADDR,
-      abi: erc20Path.abi,
-      functionName: "approve",
-      args: [Addresses.SHOP_ADDR, BigInt(nft.price)],
-    });
-  };
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const tokenContract = new ethers.Contract(
+        Addresses.GLT_ADDR,
+        erc20Path.abi,
+        signer
+      );
+      const shopContract = new ethers.Contract(
+        Addresses.SHOP_ADDR,
+        shopPath.abi,
+        signer
+      );
 
-  const mintNFT = async () => {
-    if (currentNFT) {
-      await writeShopContract({
-        address: Addresses.SHOP_ADDR,
-        abi: shopPath.abi,
-        functionName: "buyNFT",
-        args: [currentNFT.address],
-      });
-    }
-  };
+      const amount = ethers.utils.parseUnits(nft.price.toString(), 18);
 
-  useEffect(() => {
-    if (erc20AllowReceipt?.status === "success") {
       notifications.show({
-        title: "Tokens approved for purchase",
-        message: `Buying ${currentNFT?.name} for ${currentNFT?.price} GLT...`,
+        title: "Approving transaction",
+        message: `Approving ${nft.price} GLT for purchase...`,
+        color: "blue",
+        loading: true,
+        autoClose: false,
+      });
+      const approvalTx = await tokenContract.approve(
+        Addresses.SHOP_ADDR,
+        amount
+      );
+      await approvalTx.wait();
+
+      notifications.clean();
+      notifications.show({
+        title: "Transaction approved",
+        message: `Buying ${nft.name} for ${nft.price} GLT...`,
+        color: "blue",
+        loading: true,
+        autoClose: false,
+      });
+      const transferTx = await shopContract.buyNFT(nft.address, {
+        gasLimit: 300000,
+      });
+      await transferTx.wait();
+      notifications.clean();
+      notifications.show({
+        title: "NFT Minted",
+        message: `You have successfully minted ${nft.name}`,
         color: "green",
       });
-      mintNFT();
-    }
-  }, [erc20AllowReceipt]);
+    } catch (err: any) {}
+  };
 
   return { buyNft };
 };

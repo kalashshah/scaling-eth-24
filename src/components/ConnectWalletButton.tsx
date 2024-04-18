@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@cred/neopop-web/lib/components";
 import { useAccount, useEnsName } from "wagmi";
 

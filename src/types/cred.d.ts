@@ -12,5 +12,5 @@ declare module "@cred/neopop-web/lib/components" {
 }
 
 declare module "@cred/neopop-web/lib/primitives" {
-  export const { FontVariant };
+  export const { FontVariant, mainColors, colorPalette };
 }
