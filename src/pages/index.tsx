@@ -211,6 +211,7 @@ const IndexPage = () => {
                 background: "white",
                 padding: "30px",
                 margin: 20,
+                width: "100%",
               }}
             >
               <InputField
@@ -224,9 +225,7 @@ const IndexPage = () => {
                 inputMode="text"
                 label="Your Safe Wallet Address"
                 maxLength={60}
-                onBlur={function noRefCheck() {}}
                 onChange={(e: any) => setSafeAddress(e.target.value)}
-                onFocus={function noRefCheck() {}}
                 placeholder="enter your safe address"
                 type="text"
               />
