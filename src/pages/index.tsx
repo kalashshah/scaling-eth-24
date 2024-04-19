@@ -29,11 +29,13 @@ const IndexPage = () => {
     useState<Boolean>(false);
   const [delayModAddress, setDelayModAddress] = useState("");
   const [safeAddres, setSafeAddress] = useState("");
+  const [loading, setLoading] = React.useState<Boolean>(false);
 
   const handleValidateSafeAddress = async () => {
     console.log(safeAddres);
 
     try {
+      setLoading(true);
       const delayMod = await getDelayModule(safeAddres);
       setDelayModAddress(delayMod || "Not found");
 
@@ -44,6 +46,7 @@ const IndexPage = () => {
     } catch (error) {
       console.error("Error:", error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -207,6 +210,7 @@ const IndexPage = () => {
               style={{
                 background: "white",
                 padding: "30px",
+                margin: 20,
               }}
             >
               <InputField
@@ -219,7 +223,7 @@ const IndexPage = () => {
                 id="text_field"
                 inputMode="text"
                 label="Your Safe Wallet Address"
-                maxLength={30}
+                maxLength={60}
                 onBlur={function noRefCheck() {}}
                 onChange={(e: any) => setSafeAddress(e.target.value)}
                 onFocus={function noRefCheck() {}}
@@ -235,7 +239,7 @@ const IndexPage = () => {
                   marginTop: 10,
                 }}
               >
-                Validate
+                {loading ? "Getting delay module.." : "Validate"}
               </Button>
             </div>
             <ConnectWalletButton />
