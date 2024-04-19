@@ -1,28 +1,28 @@
-import { getAddress } from 'viem';
-import { SAFE_ABI } from './abi-safe';
-import { createPublicClient, http } from 'viem';
-import { gnosis } from 'viem/chains';
+import { getAddress } from "viem";
+import { SAFE_ABI } from "./abi-safe";
+import { createPublicClient, http } from "viem";
+import { gnosis } from "viem/chains";
 
 const publicClient = createPublicClient({
   chain: gnosis,
-  transport: http(),
+  transport: http("https://rpc.gnosischain.com"),
 });
 
-const DELAY_MOD_MASTERCOPY = '0xd54895b1121a2ee3f37b502f507631fa1331bed6';
+const DELAY_MOD_MASTERCOPY = "0xd54895b1121a2ee3f37b502f507631fa1331bed6";
 
-const SENTINEL_ADDRESS = '0x0000000000000000000000000000000000000001';
+const SENTINEL_ADDRESS = "0x0000000000000000000000000000000000000001";
 
 export function isGenericProxy(bytecode) {
   if (bytecode.length !== 92) return false;
   return (
-    bytecode.startsWith('0x363d3d373d3d3d363d73') &&
-    bytecode.endsWith('5af43d82803e903d91602b57fd5bf3')
+    bytecode.startsWith("0x363d3d373d3d3d363d73") &&
+    bytecode.endsWith("5af43d82803e903d91602b57fd5bf3")
   );
 }
 
 export function getGenericProxyMastercopy(bytecode) {
   if (!isGenericProxy(bytecode)) return null;
-  return '0x' + bytecode.substring(22, 22 + 40);
+  return "0x" + bytecode.substring(22, 22 + 40);
 }
 
 export function isDelayModule(bytecode) {
@@ -36,7 +36,7 @@ export async function getDelayModule(address) {
   const [moduleAddresses] = await publicClient.readContract({
     abi: SAFE_ABI,
     address,
-    functionName: 'getModulesPaginated',
+    functionName: "getModulesPaginated",
     args: [SENTINEL_ADDRESS, 10],
   });
 

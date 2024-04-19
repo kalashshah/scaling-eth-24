@@ -61,7 +61,15 @@ const useShop = () => {
         message: `You have successfully minted ${nft.name}`,
         color: "green",
       });
-    } catch (err: any) {}
+    } catch (err: any) {
+      notifications.clean();
+      const statusCode = err?.response?.status;
+      const errorMsg = err?.response?.data?.error;
+      notifications.show({
+        message: `Error ${statusCode}: ${errorMsg}`,
+        color: "red",
+      });
+    }
   };
 
   return { buyNft };

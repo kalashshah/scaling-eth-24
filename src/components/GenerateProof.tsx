@@ -93,11 +93,6 @@ function GenerateProof() {
     try {
       // Write the transaction
       await executeTransaction(proof, publicSignals);
-      notifications.show({
-        message: "Submitted transaction successfully!",
-        color: "green",
-      });
-      setAllowMint(true);
     } catch (err: any) {
       const statusCode = err?.response?.status;
       const errorMsg = err?.response?.data?.error;

@@ -35,7 +35,8 @@ contract TransactionValidatorScript is Script {
         // kitaiAirNFT.addDistributors(address(shopContract));
         // hazureAirNFT.addDistributors(address(shopContract));
 
-        addToShop();
+        // addToShop();
+        mainnetDeployment();
 
         vm.stopBroadcast();
     }
@@ -62,5 +63,26 @@ contract TransactionValidatorScript is Script {
 
         shopContract.addAirwayNfts(kitaiAirNFTinstance);
         shopContract.addAirwayNfts(hazureAirNFTinstance);
+    }
+
+    function mainnetDeployment() public {
+        // PlonkVerifier pv = new PlonkVerifier();
+        // address plonkAddress = 0x887ECa7008180B6e7C0F8904E1ed0C529aa6A84C;
+        // TransactionValidator sm = new TransactionValidator(plonkAddress);
+        // address transactionValidator = 0xB150F32383D2a8dbfdCd35b99ce805833560C074;
+        // GnosisLoungeToken glt = new GnosisLoungeToken();
+        // address gltToken = 0xCc4A6407B36120f21ff21d0F7Eef23DBEaD2A977;
+        // ShopContract shopContract = new ShopContract(gltToken);
+        // KitaiAirNFT kitaiAirNFT = new KitaiAirNFT();
+        // address shopContractAddress = 0xF3C05f8f1271868E925535c5731A53d310C7c4f5;
+        // ShopContract shopContract = ShopContract(shopContractAddress);
+        // address KitaiAirNFTAddr = 0x7Ba34Df70A46bf83DdB29801A7ee9a2a3D312e4b;
+        // HazureAirNFT hazureAirNFT = new HazureAirNFT();
+        // ShopContract.NFTListing memory kitaiAirNFTinstance = ShopContract
+        // .NFTListing({nftAddress: KitaiAirNFTAddr, price: 10 * (10 ** 18)});
+        // ShopContract.NFTListing memory hazureAirNFTinstance = ShopContract
+        // .NFTListing({nftAddress: HazureAirNFTAddr, price: 20 * (10 ** 18)});
+        // shopContract.addAirwayNfts(kitaiAirNFTinstance);
+        // shopContract.addAirwayNfts(hazureAirNFTinstance);
     }
 }

@@ -23,13 +23,13 @@ const nfts: Array<NFT> = [
     price: 10,
     address: Addresses.KITAI_NFT_ADDR,
   },
-  {
-    name: "Hazure Air NFT",
-    image:
-      "https://res.cloudinary.com/drlni3r6u/image/upload/v1713206379/gnosis-lounge/Gemini_Generated_Image_7rqfs87rqfs87rqf_jwaijk.jpg",
-    price: 20,
-    address: Addresses.HAZURE_NFT_ADDR,
-  },
+  // {
+  //   name: "Hazure Air NFT",
+  //   image:
+  //     "https://res.cloudinary.com/drlni3r6u/image/upload/v1713206379/gnosis-lounge/Gemini_Generated_Image_7rqfs87rqfs87rqf_jwaijk.jpg",
+  //   price: 20,
+  //   address: Addresses.HAZURE_NFT_ADDR,
+  // },
 ];
 
 const Lounge = () => {

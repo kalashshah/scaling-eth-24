@@ -9,3 +9,4 @@ libs = ["lib"]
 [rpc_endpoints]
 sepolia = "${SEPOLIA_RPC_URL}"
 chiado = "${CHIADO_RPC_URL}"
+gnosis = "${GNOSIS_RPC_URL}"
