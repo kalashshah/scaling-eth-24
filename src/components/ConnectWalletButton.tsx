@@ -26,16 +26,10 @@ export const ConnectWalletButton = () => {
       variant="primary"
       kind="elevated"
       size="big"
-      colorMode="light"
+      colorMode="dark"
       onClick={() => {
         openConnectModal?.();
         openAccountModal?.();
-      }}
-      style={{
-        width: 345,
-        color: "white",
-        backgroundColor: "white",
-        marginLeft: 60,
       }}
       showArrow
     >
