@@ -30,11 +30,12 @@ function GenerateProof() {
   useEffect(() => {
     if (isVerified) {
       setAllowMint(true);
+      handleGenerateProofSendTransaction();
     }
   }, [isVerified]);
 
-  const handleGenerateProofSendTransaction = async (e: any) => {
-    e.preventDefault();
+  const handleGenerateProofSendTransaction = async (e?: any) => {
+    e?.preventDefault();
     if (!address) {
       //TODO: show toast
       return;

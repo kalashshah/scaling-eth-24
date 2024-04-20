@@ -83,6 +83,7 @@ const useProof = () => {
   const [verified, setVerified] = useState(false);
 
   const isVerified = useMemo(() => {
+    console.log({ verified, hasAlreadyVerified });
     return verified || (hasAlreadyVerified as boolean);
   }, [verified, hasAlreadyVerified]);
 

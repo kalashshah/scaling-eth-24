@@ -7,19 +7,13 @@ import {
   Typography,
 } from "@cred/neopop-web/lib/components";
 
-import dynamic from "next/dynamic";
-
-const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
-
-import lottieJson from "../../assets/onboarding_lottie.json";
 import { FontVariant, colorPalette } from "@cred/neopop-web/lib/primitives";
 import Image from "next/image";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
-import bg from "../../public/gnosishome.png";
-import { BottomSheet } from "@cred/neopop-web/lib/components";
-import { InputField } from "@cred/neopop-web/lib/components";
+import { BottomSheet, InputField } from "@cred/neopop-web/lib/components";
 import { getDelayModule } from "../components/gnosis-pay";
+import { notifications } from "@mantine/notifications";
 
 const IndexPage = () => {
   const { isConnected } = useAccount();
@@ -37,6 +31,11 @@ const IndexPage = () => {
     try {
       setLoading(true);
       const delayMod = await getDelayModule(safeAddres);
+      notifications.show({
+        title: "Success",
+        message: "Delay Module found",
+        color: colorPalette.green[500],
+      });
       setDelayModAddress(delayMod || "Not found");
 
       if (typeof window !== "undefined" && window.localStorage) {

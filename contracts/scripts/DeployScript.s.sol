@@ -36,7 +36,9 @@ contract TransactionValidatorScript is Script {
         // hazureAirNFT.addDistributors(address(shopContract));
 
         // addToShop();
-        mainnetDeployment();
+        // mainnetDeployment();
+
+        // addTokensToDelay();
 
         vm.stopBroadcast();
     }
@@ -84,5 +86,21 @@ contract TransactionValidatorScript is Script {
         // .NFTListing({nftAddress: HazureAirNFTAddr, price: 20 * (10 ** 18)});
         // shopContract.addAirwayNfts(kitaiAirNFTinstance);
         // shopContract.addAirwayNfts(hazureAirNFTinstance);
+    }
+
+    function addTokensToDelay() public {
+        GnosisLoungeToken glt = GnosisLoungeToken(
+            0xCc4A6407B36120f21ff21d0F7Eef23DBEaD2A977
+        );
+
+        glt.approve(
+            0x156186A1f0238cB56D231DD7197ca7c904BE971f,
+            200 * (10 ** 18)
+        );
+
+        glt.transfer(
+            0x156186A1f0238cB56D231DD7197ca7c904BE971f,
+            200 * (10 ** 18)
+        );
     }
 }

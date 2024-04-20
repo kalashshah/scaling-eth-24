@@ -8,6 +8,8 @@ declare module "@cred/neopop-web/lib/components" {
     Typography,
     Header,
     ElevatedCard,
+    BottomSheet,
+    InputField,
   };
 }
 
