@@ -24,6 +24,7 @@ interface POAP {
 const usePOAP = () => {
   const [userPoaps, setUserPoaps] = useState<POAP[]>([]);
   const { address } = useAccount();
+  const safeAddress = localStorage.getItem("userSafeAddress");
 
   const getUserPOAPs = async () => {
     const options = {
@@ -36,7 +37,7 @@ const usePOAP = () => {
 
     try {
       const response = await fetch(
-        `https://api.poap.tech/actions/scan/${address}`,
+        `https://api.poap.tech/actions/scan/${safeAddress}`,
         options
       );
       if (!response.ok) {

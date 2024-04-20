@@ -6,6 +6,7 @@ import { useAccount } from "wagmi";
 
 const Card = () => {
   const { address } = useAccount();
+  const safeAddress = localStorage.getItem("userSafeAddress");
 
   return (
     <div
@@ -30,8 +31,8 @@ const Card = () => {
           {...FontVariant.HeadingBold20}
           style={{ paddingTop: 80, paddingLeft: 10 }}
         >
-          {address?.slice(0, 10)}...
-          {address?.slice(address.length - 10, address.length)}
+          {safeAddress?.slice(0, 10)}...
+          {safeAddress?.slice(safeAddress.length - 10, safeAddress.length)}
         </Typography>
       </div>
     </div>
