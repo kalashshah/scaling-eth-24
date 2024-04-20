@@ -7,18 +7,18 @@ import { useReadContract } from "wagmi";
 const erc20Path = require("../lib/abi/GnosisLoungeToken.json");
 
 const useGLT = () => {
-  const [delayModAddress, setDelayModAddress] = useState<string | null>(null);
+  const [safeAddress, setSafeAddress] = useState<string | null>(null);
   const { data: balance, refetch: refetchBalance } = useReadContract({
     abi: erc20Path.abi,
     address: Addresses.GLT_ADDR,
     functionName: "balanceOf",
-    args: [delayModAddress!],
+    args: [safeAddress!],
   });
 
   useEffect(() => {
     if (localStorage) {
-      const getLocalState = localStorage.getItem("userDelayModAddress");
-      setDelayModAddress(getLocalState);
+      const getSafeAddress = localStorage.getItem("userSafeAddress");
+      setSafeAddress(getSafeAddress);
       refetchBalance();
     }
   }, []);

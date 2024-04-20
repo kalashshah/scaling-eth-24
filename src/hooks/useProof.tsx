@@ -1,23 +1,13 @@
 import { Addresses } from "@/shared/addresses";
 import { notifications } from "@mantine/notifications";
 import { ethers } from "ethers";
-import { useEffect, useMemo, useState } from "react";
-import {
-  useAccount,
-  useReadContract,
-  useWaitForTransactionReceipt,
-  useWatchContractEvent,
-  useWriteContract,
-} from "wagmi";
+import { useMemo, useState } from "react";
+import { useAccount, useReadContract } from "wagmi";
+import useCashback from "./useCashback";
 
 const txValidatorPath = require("../lib/abi/TransactionValidator.json");
 
 const useProof = () => {
-  // const { writeContract, data: hash } = useWriteContract();
-  // const { data: txReceipt, error } = useWaitForTransactionReceipt({ hash });
-
-  // console.log({ hash, txReceipt, error });
-
   const { address } = useAccount();
 
   const { data: hasAlreadyVerified, refetch: refetchIsVerified } =
@@ -28,59 +18,8 @@ const useProof = () => {
       args: [address!],
     });
 
-  // console.log({ isVerified });
-
-  // useWatchContractEvent({
-  //   abi: abiPath.abi,
-  //   address: Addresses.TRANSACTION_VALIDATOR_ADDR,
-  //   eventName: "ProofResult",
-  //   onLogs: (logs) => {
-  //     console.log(`ProofResult logs:`, { logs });
-  //   },
-  // });
-
-  // const executeTransaction = async (
-  //   proof: any,
-  //   publicSignals: Array<string>
-  // ): Promise<void> => {
-  //   try {
-  //     console.log(
-  //       `Executing transaction with proof: ${proof} and public signals: ${publicSignals}`,
-  //       {
-  //         abi: abiPath.abi,
-  //       }
-  //     );
-
-  //     writeContract({
-  //       abi: abiPath.abi,
-  //       address: Addresses.TRANSACTION_VALIDATOR_ADDR_GNOSIS,
-  //       functionName: "submitProof",
-  //       args: [proof, publicSignals, address],
-  //     });
-  //   } catch (err) {
-  //     console.log(`Error executing transaction: ${err}`);
-  //     notifications.show({
-  //       message: `Error executing transaction: ${err}`,
-  //       color: "red",
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (txReceipt) {
-  //     console.log(
-  //       `Transaction receipt: ${JSON.stringify(txReceipt.transactionHash)}`
-  //     );
-  //     notifications.show({
-  //       message: `Transaction succeeded! Tx Hash: ${txReceipt.transactionHash}`,
-  //       color: "green",
-  //       autoClose: false,
-  //     });
-  //     refetchIsVerified();
-  //   }
-  // }, [txReceipt]);
-
   const [verified, setVerified] = useState(false);
+  const { getCashback } = useCashback();
 
   const isVerified = useMemo(() => {
     console.log({ verified, hasAlreadyVerified });
@@ -117,7 +56,7 @@ const useProof = () => {
           gasLimit: 300000,
         }
       );
-      await tx.wait();
+      const receipt = await tx.wait();
 
       notifications.clean();
       notifications.show({
@@ -126,6 +65,7 @@ const useProof = () => {
         color: "green",
       });
       setVerified(true);
+      getCashback(receipt.transactionHash, "LOUNGE_ENTRY");
     } catch (err) {
       notifications.clean();
       notifications.show({

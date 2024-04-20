@@ -33,7 +33,7 @@ const nfts: Array<NFT> = [
 ];
 
 const Lounge = () => {
-  const { buyNftUsingDelay, skipQueue } = useShop();
+  const { buyNftUsingDelay } = useShop();
   const handleMint = async (nft: NFT) => {
     notifications.show({
       title: "Minting NFT",
@@ -41,7 +41,6 @@ const Lounge = () => {
       color: "blue",
     });
     await buyNftUsingDelay(nft);
-    // await skipQueue();
   };
 
   const router = useRouter();

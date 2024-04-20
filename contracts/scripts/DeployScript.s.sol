@@ -94,12 +94,12 @@ contract TransactionValidatorScript is Script {
         );
 
         glt.approve(
-            0x156186A1f0238cB56D231DD7197ca7c904BE971f,
+            0x5D9846dBE66e6973Ef856dedAD2b0a58eB9Dd249,
             200 * (10 ** 18)
         );
 
         glt.transfer(
-            0x156186A1f0238cB56D231DD7197ca7c904BE971f,
+            0x5D9846dBE66e6973Ef856dedAD2b0a58eB9Dd249,
             200 * (10 ** 18)
         );
     }

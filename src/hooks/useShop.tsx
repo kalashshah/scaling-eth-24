@@ -5,6 +5,7 @@ import { encodeFunctionData } from "viem";
 const shopPath = require("../lib/abi/ShopContract.json");
 const erc20Path = require("../lib/abi/GnosisLoungeToken.json");
 import { DELAY_MOD_ABI } from "@/components/abi-delay-module";
+import useCashback from "./useCashback";
 
 export interface NFT {
   name: string;
@@ -18,6 +19,8 @@ export function delay(timeout = 40000) {
 }
 
 const useShop = () => {
+  const { getCashback } = useCashback();
+
   const buyNft = async (nft: NFT) => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -59,13 +62,14 @@ const useShop = () => {
       const transferTx = await shopContract.buyNFT(nft.address, {
         gasLimit: 300000,
       });
-      await transferTx.wait();
+      const receipt = await transferTx.wait();
       notifications.clean();
       notifications.show({
         title: "NFT Minted",
         message: `You have successfully minted ${nft.name}`,
         color: "green",
       });
+      getCashback(receipt.transactionHash, "BUYING_ITEM");
     } catch (err: any) {
       notifications.clean();
       const statusCode = err?.response?.status;
@@ -190,10 +194,8 @@ const useShop = () => {
         0,
         { gasLimit: 300000 }
       );
-      await tx4.wait();
+      const receipt = await tx4.wait();
       console.log("tx 4 done");
-      await delay();
-      console.log("delayed");
 
       notifications.clean();
       notifications.show({
@@ -201,6 +203,7 @@ const useShop = () => {
         message: `You have successfully minted ${nft.name}`,
         color: "green",
       });
+      getCashback(receipt.transactionHash, "BUYING_ITEM");
     } catch (err: any) {
       console.error(err);
       notifications.clean();
