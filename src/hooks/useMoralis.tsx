@@ -23,7 +23,7 @@ export const useMoralis = () => {
     try {
       const safeAddress = localStorage.getItem("userSafeAddress");
       const response = await fetch(
-        `https://api.gnosisscan.io/api?module=account&action=txlist&address=${safeAddress}&startblock=1&endblock=99999999&sort=asc&apikey=${process.env.NEXT_GNOSIS_API_KEY}`
+        `https://api.gnosisscan.io/api?module=account&action=txlist&address=${address}&startblock=1&endblock=99999999&sort=asc&apikey=${process.env.NEXT_GNOSIS_API_KEY}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data");

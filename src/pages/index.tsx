@@ -5,13 +5,20 @@ import {
   Column,
   Row,
   Typography,
+  BottomSheet,
+  InputField,
+  Checkbox,
 } from "@cred/neopop-web/lib/components";
 
-import { FontVariant, colorPalette } from "@cred/neopop-web/lib/primitives";
+import {
+  FontVariant,
+  colorPalette,
+  colorGuide,
+  mainColors,
+} from "@cred/neopop-web/lib/primitives";
 import Image from "next/image";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/router";
-import { BottomSheet, InputField } from "@cred/neopop-web/lib/components";
 import { getDelayModule } from "../components/gnosis-pay";
 import { notifications } from "@mantine/notifications";
 
@@ -24,6 +31,7 @@ const IndexPage = () => {
   const [delayModAddress, setDelayModAddress] = useState("");
   const [safeAddres, setSafeAddress] = useState("");
   const [loading, setLoading] = React.useState<Boolean>(false);
+  const [isChecked, setIsChecked] = React.useState<Boolean>(false);
 
   const handleValidateSafeAddress = async () => {
     console.log(safeAddres);
@@ -240,6 +248,34 @@ const IndexPage = () => {
                 {loading ? "Getting delay module.." : "Validate"}
               </Button>
             </div>
+            <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+              <Checkbox
+                isChecked={isChecked}
+                colorConfig={colorGuide.lightComponents.checkbox}
+                handleChange={() => setIsChecked(!isChecked)}
+              >
+                <Typography
+                  {...FontVariant.BodyRegular16}
+                  color={colorPalette.popBlack[100]}
+                >
+                  I agree to the{" "}
+                  <a
+                    href="https://app.ethsign.xyz/contract/ES-V-26gZHtDbn9jez1REFKbvk"
+                    target={"_blank"}
+                    rel={"noreferrer"}
+                  >
+                    <Button
+                      kind="link"
+                      color={mainColors.black}
+                      textStyle={{ ...FontVariant.BodyRegular16 }}
+                    >
+                      terms and conditions
+                    </Button>
+                  </a>
+                </Typography>
+              </Checkbox>
+            </div>
+
             <ConnectWalletButton />
           </Column>
         </div>
