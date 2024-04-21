@@ -16,7 +16,7 @@ The objective is to establish a comprehensive loyalty and rewards program tailor
 
 - User authentication involves linking their EoA and specifying their safe address. Upon validation of the safe address and retrieval of the delay module, users are prompted to sign terms and conditions via EthSign before proceeding.
 - Upon login, users are directed to the home screen where they can view their card details, transaction history (sourced from Gnosis APIs), and their POAPs, which they can mint for free on the Gnosis platform, post checking in to the lounge. Additionally, users can check in to the airport lounge.
-- The check-in process generates a zero-knowledge proof indicating the user's transaction history surpasses a defined threshold. This proof is presented to lounge staff for verification on-chain. Upon successful verification, users can mint their POAP and access the lounge store.
+- The check-in process generates a zero-knowledge proof indicating the user's transaction history surpasses a defined threshold. This proof is presented to lounge staff for verification on-chain. Upon successful verification, users can mint their POAP and access the lounge store. The user gets a cashback everytime he generates proof to checkin to the lounge
 - The lounge store showcases various offerings, including airline loyalty NFTs. Ownership of these NFTs unlocks eligibility for airdrops and other rewards.
 - Integration with Heartbit enables on-chain analysis of user behavior, providing invaluable insights for partnered brands showcased in the lounge store.
 - Users can purchase NFTs using the Gnosis Pay delay module. Upon NFT minting, users receive cashback in the form of random "Gnosis Lounge Tokens," enhancing engagement and loyalty.
