@@ -24,7 +24,7 @@ const ProofPage = () => {
     >
       <Header
         onBackClick={() => {
-          router.push("/home");
+          router.push("/dashboard");
         }}
       />
       <Row className="v-justify">

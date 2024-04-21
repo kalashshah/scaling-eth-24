@@ -61,7 +61,7 @@ const Lounge = () => {
             heading="Shop on Gnosis Lounge"
             description="pay using gnosis card and get exclusive rewards"
             onBackClick={() => {
-              router.push("/home");
+              router.push("/dashboard");
             }}
           />
           <Row className="v-center">

@@ -56,7 +56,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     if (isConnected) {
-      router.push("/home");
+      router.push("/dashboard");
     }
   }, [isConnected]);
 

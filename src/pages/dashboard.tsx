@@ -25,7 +25,7 @@ function truncateHexString(hexString: string): string {
   return prefix + "..." + suffix;
 }
 
-const Home = () => {
+const Dashboard = () => {
   const { transaction } = useMoralis();
   const { userPoaps } = usePOAP();
   const router = useRouter();
@@ -216,4 +216,4 @@ const Home = () => {
   );
 };
 
-export default withAuth(Home);
+export default withAuth(Dashboard);
