@@ -35,14 +35,11 @@ const IndexPage = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const userSafeAddress = localStorage.getItem("userSafeAddress");
-      const userDelayModAddress = localStorage.getItem("userDelayModAddress");
-
-      if (userSafeAddress && userSafeAddress !== "") {
-        setSafeAddress(userSafeAddress);
+      if (safeAddres && safeAddres !== "") {
+        localStorage.setItem("userSafeAddress", safeAddres);
       }
-      if (userDelayModAddress && userDelayModAddress !== "") {
-        setDelayModAddress(userDelayModAddress);
+      if (delayModAddress && delayModAddress !== "") {
+        localStorage.setItem("userDelayModAddress", delayModAddress);
       }
     }
   }, [safeAddres, delayModAddress]);
