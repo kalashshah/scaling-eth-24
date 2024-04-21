@@ -1,3 +1,13 @@
+**Project Demo**
+Head over to https://ethglobal.com/showcase/gnosis-lounge-3dqdk to view the demo video of the project
+
+**Prequisites**
+- Please use the project in iphone14 pro max dimensions using inspector for the best experience
+- Need to have a delay module associated to your safe 
+- Need to have some initial supply of GLT please raise an issue with your address and we will send them over to you
+- Need to have a few mainnet funds to cover for gas
+
+
 **Project Overview**:
 
 The objective is to establish a comprehensive loyalty and rewards program tailored for Gnosis Pay cardholders. While envisioning a universal protocol for loyalty and rewards within the Gnosis ecosystem, we're launching a proof of concept (POC) focused on Airport Lounge access.
