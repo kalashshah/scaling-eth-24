@@ -33,6 +33,20 @@ const IndexPage = () => {
   const [loading, setLoading] = React.useState<Boolean>(false);
   const [isChecked, setIsChecked] = React.useState<Boolean>(false);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userSafeAddress = localStorage.getItem("userSafeAddress");
+      const userDelayModAddress = localStorage.getItem("userDelayModAddress");
+
+      if (userSafeAddress && userSafeAddress !== "") {
+        setSafeAddress(userSafeAddress);
+      }
+      if (userDelayModAddress && userDelayModAddress !== "") {
+        setDelayModAddress(userDelayModAddress);
+      }
+    }
+  }, [safeAddres, delayModAddress]);
+
   const handleValidateSafeAddress = async () => {
     try {
       setLoading(true);
@@ -44,7 +58,7 @@ const IndexPage = () => {
       });
       setDelayModAddress(delayMod || "Not found");
 
-      if (typeof window !== "undefined" && window.localStorage) {
+      if (typeof window !== "undefined") {
         localStorage.setItem("userSafeAddress", safeAddres);
         localStorage.setItem("userDelayModAddress", delayMod);
       }
