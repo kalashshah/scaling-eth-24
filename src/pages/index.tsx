@@ -51,7 +51,7 @@ const IndexPage = () => {
       notifications.show({
         title: "Success",
         message: "Delay Module found",
-        color: colorPalette.green[500],
+        color: "green",
       });
       setDelayModAddress(delayMod || "Not found");
 
