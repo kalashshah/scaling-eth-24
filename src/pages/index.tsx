@@ -34,8 +34,6 @@ const IndexPage = () => {
   const [isChecked, setIsChecked] = React.useState<Boolean>(false);
 
   const handleValidateSafeAddress = async () => {
-    console.log(safeAddres);
-
     try {
       setLoading(true);
       const delayMod = await getDelayModule(safeAddres);

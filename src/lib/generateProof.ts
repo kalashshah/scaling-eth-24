@@ -3,8 +3,6 @@ import path from "path";
 import * as snarkjs from "snarkjs";
 
 export const generateProof = async (input0: number) => {
-  console.log(`Generating vote proof with inputs: ${input0}`);
-
   const inputs = {
     in: [input0],
   };
@@ -40,9 +38,6 @@ export const generateProof = async (input0: number) => {
 
       proofString = JSON.parse(`[${proofString}]`);
       publicSignalsString = JSON.parse(`[${publicSignalsString}]`);
-
-      console.log("Proof:", proof);
-      console.log("Public Signals:", publicSignals);
     }
 
     return {

@@ -8,21 +8,19 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
 import { queryClient } from "@/config/query-client";
 import { rainbowConfig } from "@/config/rainbowkit";
-import Moralis from "moralis";
-import { EvmChain } from "@moralisweb3/common-evm-utils";
-import { useEffect } from "react";
+import { HeartBitProvider } from "@fileverse/heartbit-react";
+import { heartbitOptions } from "@/config/heartbit";
 
 export default function App({ Component, pageProps }: AppProps) {
-  // We'll be using Wagmi sending our transaction and Mantine for CSS
-  // and notifications
-
   return (
     <MantineProvider withNormalizeCSS>
       <WagmiProvider config={rainbowConfig}>
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider theme={darkTheme()}>
-            <Notifications />
-            <Component {...pageProps} />
+            <HeartBitProvider coreOptions={heartbitOptions}>
+              <Notifications />
+              <Component {...pageProps} />
+            </HeartBitProvider>
           </RainbowKitProvider>
         </QueryClientProvider>
       </WagmiProvider>
