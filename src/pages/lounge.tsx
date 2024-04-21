@@ -1,4 +1,6 @@
+import { heartbitOptions } from "@/config/heartbit";
 import useGLT from "@/hooks/useGLT";
+import useHeartbitSDK from "@/hooks/useHeartbitSDK";
 import useShop, { NFT } from "@/hooks/useShop";
 import { Addresses } from "@/shared/addresses";
 import {
@@ -8,8 +10,10 @@ import {
   Row,
   Button,
   Typography,
+  VerticalSpacer,
 } from "@cred/neopop-web/lib/components";
 import { FontVariant } from "@cred/neopop-web/lib/primitives";
+import { HeartBit } from "@fileverse/heartbit-react";
 import { notifications } from "@mantine/notifications";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -34,6 +38,8 @@ const nfts: Array<NFT> = [
 
 const Lounge = () => {
   const { buyNftUsingDelay } = useShop();
+  const { getSignatureArgsHook } = useHeartbitSDK(nfts[0].address);
+
   const handleMint = async (nft: NFT) => {
     notifications.show({
       title: "Minting NFT",
@@ -47,8 +53,6 @@ const Lounge = () => {
 
   const { formattedBalance, refetchBalance } = useGLT();
 
-  console.log({ formattedBalance });
-
   return (
     <>
       <div style={{ margin: 16 }}>
@@ -58,7 +62,6 @@ const Lounge = () => {
             description="pay using gnosis card and get exclusive rewards"
             onBackClick={() => {
               router.push("/home");
-              console.log("back clicked");
             }}
           />
           <Row className="v-center">
@@ -129,14 +132,22 @@ const Lounge = () => {
                     >
                       {nft.name}
                     </Typography>
-                    <Button
-                      kind="elevated"
-                      showArrow
-                      variant="primary"
-                      onClick={() => handleMint(nft)}
-                    >
-                      Buy for {nft.price}
-                    </Button>
+                    <Row>
+                      <Button
+                        kind="elevated"
+                        showArrow
+                        variant="primary"
+                        onClick={() => handleMint(nft)}
+                      >
+                        Buy for {nft.price}
+                      </Button>
+                      <VerticalSpacer n={3} />
+                      <HeartBit
+                        coreOptions={heartbitOptions}
+                        getSignatureArgsHook={getSignatureArgsHook}
+                        hash={nft.address}
+                      />
+                    </Row>
                   </div>
                 </ElevatedCard>
               </>

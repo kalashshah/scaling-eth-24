@@ -29,7 +29,6 @@ export const useMoralis = () => {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      console.log(data.result);
       setTransactions(data.result);
       return data;
     } catch (error) {
