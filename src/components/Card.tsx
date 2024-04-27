@@ -11,8 +11,7 @@ const Card = () => {
   return (
     <div
       style={{
-        width: 400,
-        height: 250,
+        width: "100%",
         marginTop: 20,
         position: "relative",
       }}
@@ -20,11 +19,10 @@ const Card = () => {
       <Image
         src="/gnosis-card.png"
         alt="gnosis-card"
-        width={400}
-        height={250}
-        style={{
-          borderRadius: 16,
-        }}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: "100%", height: "auto", borderRadius: 16 }}
       />
       <div style={{ position: "absolute", zIndex: 1, bottom: 10, right: 10 }}>
         <Typography

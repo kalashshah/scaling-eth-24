@@ -32,7 +32,7 @@ const Dashboard = () => {
   const { openAccountModal } = useAccountModal();
 
   return (
-    <div style={{ margin: 16 }}>
+    <div style={{ padding: 16 }}>
       <Row className="v-justify">
         <div onClick={openAccountModal}>
           <Row className="h-center v-start">

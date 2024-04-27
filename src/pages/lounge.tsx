@@ -98,17 +98,25 @@ const Lounge = () => {
                     right: "#244B3B",
                   }}
                   style={{
-                    width: "400px",
-                    height: "400px",
+                    width: "100%",
+                    height: "90vw",
+                    maxHeight: 400,
                     marginTop: 15,
+                    margin: 20,
                   }}
                 >
                   <Image
                     src={nft.image}
                     alt={nft.name}
-                    width={397}
-                    height={397}
-                    style={{ zIndex: 0, position: "absolute" }}
+                    width={0}
+                    height={0}
+                    sizes="90vw"
+                    fill
+                    style={{
+                      width: "100%",
+                      zIndex: 0,
+                      position: "absolute",
+                    }}
                   />
                   <div
                     style={{
